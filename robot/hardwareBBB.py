@@ -16,5 +16,5 @@ def setGpio(num, val):
 	print 'GPIO stuff'
 
 def onFail():
-	for failz in pwmarray
+	for failz in pwmarray:
 		PWM.set_duty_cycle(pwmarray[failz], val)

@@ -23,8 +23,8 @@ screen = pygame.display.set_mode([1,1])
 #init the queue
 pygame.fastevent.init()
 #init the joystick
-js = pygame.joystick.Joystick(0)
-js.init()
+#js = pygame.joystick.Joystick(0)
+#js.init()
 #start the connection
 con = Connection()
 con.openListen()
