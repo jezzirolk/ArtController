@@ -14,6 +14,7 @@ import time
 import pygame
 import string
 import robotCode
+import hardware
 #makes it so no screen opens
 os.environ["SDL_VIDEODRIVER"] = 'dummy'
 #init the pygame and display setup
@@ -26,6 +27,7 @@ pygame.fastevent.init()
 #js = pygame.joystick.Joystick(0)
 #js.init()
 #start the connection
+hardware.init()
 con = Connection()
 con.openListen()
 #start the timer
