@@ -21,7 +21,7 @@ print 'Bound at port %d' % port
 s.listen(1)
 
 connection, client_address = s.accept()
-print 'Connected to %s' % client_address
+print 'Connected to', client_address
 
 # Start PWM values at pseudo-zero
 for st in pwm:
@@ -38,7 +38,10 @@ while True:
         
     elif msg == 'pwm':
         # PWM signal command was sent
-        PWM.set_duty_cycle(pwm[connection.recv(1)], float(connection.recv(5)))
+	id = int(connection.recv(1))
+	val = float(connection.recv(5))
+	print 'PWM', id, val
+        PWM.set_duty_cycle(pwm[id], val)
         
     elif msg == 'cls':
         # Received the disconnect command
