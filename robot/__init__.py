@@ -17,7 +17,7 @@ port = 1857
 # Setup data socket
 s = socket.socket()
 s.bind((host, port))
-print 'Bound at port %d' % port
+print 'Bound at port', port
 s.listen(1)
 
 connection, client_address = s.accept()
@@ -33,14 +33,16 @@ while True:
     
     if msg == 'drv':
         # Drive command was sent
-        PWM.set_duty_cycle(pwm[ldrive], float(connection.recv(5)))
-        PWM.set_duty_cycle(pwm[rdrive], float(connection.recv(5)))
+        lval = float(connection.recv(5))
+        rval = float(connection.recv(5))
+        PWM.set_duty_cycle(pwm[ldrive], lval)
+        PWM.set_duty_cycle(pwm[rdrive], rval)
         
     elif msg == 'pwm':
         # PWM signal command was sent
-	id = int(connection.recv(1))
-	val = float(connection.recv(5))
-	print 'PWM', id, val
+        num = int(connection.recv(1))
+        val = float(connection.recv(5))
+        print 'PWM', id, val
         PWM.set_duty_cycle(pwm[id], val)
         
     elif msg == 'cls':
@@ -49,9 +51,7 @@ while True:
         connection.sendall('GG')
         break
 
-# Stop PWM signals and clean up
-for st in pwm:
-    PWM.stop(st)
+# Clean up PWMs
 PWM.cleanup()
 
 # Clean up connection object
