@@ -11,48 +11,47 @@ packetLoss = 5  # Optimizing
 ldrive = 0
 rdrive = 1
 
+host = ''
+port = 1857
+
 # Setup data socket
 s = socket.socket()
-driver_address = (socket.gethostname(), 1857)  # Change from localhost eventually
-s.bind(driver_address)
+s.bind((host, port))
+print 'Bound at port %d' % port
 s.listen(1)
 
+connection, client_address = s.accept()
+print 'Connected to %s' % client_address
+
+# Start PWM values at pseudo-zero
+for st in pwm:
+    PWM.start(st, 50)
+
+# Handle Driver Input
 while True:
-    try:
-        print 'Waiting for Driver connection...'
-        connection, client_address = s.accept()
-        print 'Got a connection from', client_address
+    msg = connection.recv(3)
+    
+    if msg == 'drv':
+        # Drive command was sent
+        PWM.set_duty_cycle(pwm[ldrive], float(connection.recv(5)))
+        PWM.set_duty_cycle(pwm[rdrive], float(connection.recv(5)))
         
-        # Start PWM values at pseudo-zero
-        for st in pwm:
-            PWM.start(st, 50)
+    elif msg == 'pwm':
+        # PWM signal command was sent
+        PWM.set_duty_cycle(pwm[connection.recv(1)], float(connection.recv(5)))
         
-        # Handle Driver Input
-        while True:
-            msg = connection.recv(3)
-            
-            if msg == 'drv':
-                # Drive command was sent
-                PWM.set_duty_cycle(pwm[ldrive], float(connection.recv(5)))
-                PWM.set_duty_cycle(pwm[rdrive], float(connection.recv(5)))
-                
-            elif msg == 'pwm':
-                # PWM signal command was sent
-                PWM.set_duty_cycle(pwm[connection.recv(1)], float(connection.recv(5)))
-                
-            elif msg == 'cls':
-                # Received the disconnect command
-                print 'Driver disconnected, cleaning up...'
-                connection.sendall('GG')
-                break
-    except:
-        pass
-    finally:
-        # Stop PWM signals and clean up
-        for st in pwm:
-            PWM.stop(st)
-        PWM.cleanup()
-        
-        # Clean up connection object
-        connection.close()
+    elif msg == 'cls':
+        # Received the disconnect command
+        print 'Driver disconnected, cleaning up...'
+        connection.sendall('GG')
+        break
+
+# Stop PWM signals and clean up
+for st in pwm:
+    PWM.stop(st)
+PWM.cleanup()
+
+# Clean up connection object
+connection.close()
+
 s.close()
