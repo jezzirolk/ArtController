@@ -2,7 +2,7 @@ import socket
 import sys
 import time
 
-driver_ip = socket.gethostname()
+driver_ip = '192.168.1.115'
 port = 1857
 s = socket.socket()
 robot_connection = (driver_ip, port)

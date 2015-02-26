@@ -18,9 +18,9 @@ s.bind(driver_address)
 s.listen(1)
 
 while True:
-    print 'Waiting for Driver connection...'
-    connection, client_address = s.accept()
     try:
+        print 'Waiting for Driver connection...'
+        connection, client_address = s.accept()
         print 'Got a connection from', client_address
         
         # Start PWM values at pseudo-zero
