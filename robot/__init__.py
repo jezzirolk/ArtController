@@ -45,7 +45,8 @@ while True:
                 print 'Driver disconnected, cleaning up...'
                 connection.sendall('GG')
                 break
-            
+    except:
+        pass
     finally:
         # Stop PWM signals and clean up
         for st in pwm:
