@@ -1,6 +1,7 @@
 import socket
-import Adafruit_BBIO.PWM as PWM
+#import Adafruit_BBIO.PWM as PWM
 import sys
+import robotCode
 
 # Set IO values for future use
 # TODO: GPIO, I2C, UART
@@ -24,35 +25,32 @@ connection, client_address = s.accept()
 print 'Connected to', client_address
 
 # Start PWM values at pseudo-zero
-for st in pwm:
-    PWM.start(st, 50)
+#for st in pwm:
+#    PWM.start(st, 50)
 
 # Handle Driver Input
 while True:
-    msg = connection.recv(3)
-    
-    if msg == 'drv':
-        # Drive command was sent
-        lval = float(connection.recv(5))
-        rval = float(connection.recv(5))
-        PWM.set_duty_cycle(pwm[ldrive], lval)
-        PWM.set_duty_cycle(pwm[rdrive], rval)
+	msg = connection.recv(3)
+	if msg == 'dig':
+		print 'dig'
+	elif msg == 'ana':
+		#analog signal
+		num = int(connection.recv(1))
+		val = float(connection.recv(3))
+		robotCode.onAnalog(num, val)
         
-    elif msg == 'pwm':
-        # PWM signal command was sent
-        num = int(connection.recv(1))
-        val = float(connection.recv(5))
-        print 'PWM', id, val
-        PWM.set_duty_cycle(pwm[id], val)
-        
-    elif msg == 'cls':
+	elif msg == 'cls':
         # Received the disconnect command
-        print 'Driver disconnected, cleaning up...'
-        connection.sendall('GG')
-        break
+		print 'Driver disconnected, cleaning up...'
+		connection.sendall('GG')
+		break
+	elif msg == 'ick':
+		print 'ick, Ack'
+	else:
+		print 'was sent'
 
 # Clean up PWMs
-PWM.cleanup()
+#PWM.cleanup()
 
 # Clean up connection object
 connection.close()
