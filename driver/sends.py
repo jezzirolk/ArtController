@@ -1,25 +1,35 @@
 import sys
 import time
 import socket
+import threading
+import pygame
+USRFUCKIT = pygame.USEREVENT + 5
 class Connection(object):
 	def __init__(self):
 		self.s = 0
 		self.ip = 0
+		self.rcv = 0
+		self.rcvrun = threading.Event()
 	
 	def openConnection(self, ips):
 		self.ip = ips
 		port = 1857
 		self.s = socket.socket()
 		con = (self.ip, port)
-		while 1:
+		done = False
+		while not done:
 			try:
 				self.s.connect(con)
 				print 'robot connected'
+				done = True
 				break
 			except:
 				print 'waiting for connection'
 				time.sleep(2)
-
+		self.rcv = threading.Thread(target=rcv, args=[self.rcvrun,self.s])
+		self.rcv.setDaemon(True)	
+		self.rcv.start()
+	
 	def sendClose(self):
 		msg = 'cls'
 		self.send(msg)
@@ -54,3 +64,25 @@ class Connection(object):
 			except:
 				print 'lost connection trying again'
 				self.openConnection(self.ip)
+
+def rcv(rcvrun, s):
+	print '1'
+	rcvrun.set()
+	done = False
+	print '2'
+	ev = pygame.event.Event(pygame.USEREVENT + 5, x=0)
+	pygame.fastevent.post(ev)
+	while not done:
+		msg = s.recv(3)
+		if msg == 'ack':
+			print 'ack'
+		elif msg == '':
+			print 'its dead jim'
+			done = True
+		else:
+			print msg
+			print 'was sent'
+	rcvrun.clear()
+	return
+
+

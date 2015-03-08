@@ -6,7 +6,9 @@ import string
 import os
 from sends import Connection
 from timer import Timer
-USRICK = pygame.USEREVENT+2
+USRICK = pygame.USEREVENT
+USR10HZ = pygame.USEREVENT + 1
+USR1HZ = pygame.USEREVENT + 2
 os.environ["SDL_VIDEODRIVER"] = 'dummy'
 pygame.init()
 pygame.display.init()
@@ -27,6 +29,12 @@ while True:
 	elif ev.type == USRICK:
 		print 'ick'
 		con.sendIck()
+	elif ev.type == USR10HZ:
+		print '10hz'
+	elif ev.type == USR1HZ:
+		print '1hz'
+	elif ev.type == pygame.USEREVENT +5:
+		print 'It Works!'
 	else:
 		print 'something Else'
 

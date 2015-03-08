@@ -45,9 +45,15 @@ while True:
 		connection.sendall('GG')
 		break
 	elif msg == 'ick':
+		connection.sendall('ack')
 		print 'ick, Ack'
+	elif msg == '':
+		print 'its dead jim'	
+		break
 	else:
+		print msg
 		print 'was sent'
+	
 
 # Clean up PWMs
 #PWM.cleanup()
