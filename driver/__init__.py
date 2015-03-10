@@ -6,14 +6,14 @@ import string
 import os
 from sends import Connection
 from timer import Timer
-USRICK = pygame.USEREVENT
-USR10HZ = pygame.USEREVENT + 1
-USR1HZ = pygame.USEREVENT + 2
-os.environ["SDL_VIDEODRIVER"] = 'dummy'
+import evtype
+#os.environ["SDL_VIDEODRIVER"] = 'dummy'
 pygame.init()
 pygame.display.init()
-screen = pygame.display.set_mode([1,1])
+screen = pygame.display.set_mode([800,600])
 pygame.fastevent.init()
+js = pygame.joystick.Joystick(0)
+js.init()
 
 con = Connection()
 t=Timer()
@@ -26,13 +26,26 @@ while True:
 	if ev.type == pygame.NOEVENT:
 		print 'wait'
 		time.sleep(.2)
-	elif ev.type == USRICK:
+	elif ev.type == evtype.USRICK:
 		print 'ick'
 		con.sendIck()
-	elif ev.type == USR10HZ:
+	elif ev.type == evtype.USR10HZ:
 		print '10hz'
-	elif ev.type == USR1HZ:
+	elif ev.type == evtype.USR1HZ:
 		print '1hz'
+	elif ev.type == evtype.USRDIGITAL
+		print 'digital signal recieved'
+	elif ev.type == evtype.USRANALOG
+		print 'analog signal recieved'`
+	elif ev.type == pygame.JOYBUTTONDOWN:
+		con.sendDigital(ev.button, True)
+	elif ev.type == pygame.JOYBUTTONUP:
+		con.sendDigital(ev.button, False)
+		print 'joystick buttons'
+	elif ev.type == pygame.JOYAXISMOTION:
+		print ev.axis
+		print ev.value
+		con.sendAnalog(ev.axis,ev.value)
 	elif ev.type == pygame.USEREVENT +5:
 		print 'It Works!'
 	else:

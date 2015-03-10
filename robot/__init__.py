@@ -2,6 +2,7 @@ import socket
 #import Adafruit_BBIO.PWM as PWM
 import sys
 import robotCode
+import cPickle
 
 # Set IO values for future use
 # TODO: GPIO, I2C, UART
@@ -32,12 +33,17 @@ print 'Connected to', client_address
 while True:
 	msg = connection.recv(3)
 	if msg == 'dig':
-		print 'dig'
+		#if it is a digital message
+		leng = int(connection.recv(5))
+		msg = connection.recv(leng)
+		data = cPickle.loads(msg)
+		robotCode.onDigital(data[0], data[1])
 	elif msg == 'ana':
-		#analog signal
-		num = int(connection.recv(1))
-		val = float(connection.recv(3))
-		robotCode.onAnalog(num, val)
+		#if it is an analog message
+		leng = int(connection.recv(5))
+		msg = connection.recv(leng)
+		data = cPickle.loads(msg)
+		robotCode.onAnalog(data[0], data[1])
         
 	elif msg == 'cls':
         # Received the disconnect command

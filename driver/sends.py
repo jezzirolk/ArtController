@@ -3,7 +3,8 @@ import time
 import socket
 import threading
 import pygame
-USRFUCKIT = pygame.USEREVENT + 5
+import cPickle
+import evtype
 class Connection(object):
 	def __init__(self):
 		self.s = 0
@@ -36,15 +37,15 @@ class Connection(object):
 		self.cls()
 
 	def sendAnalog(self, num, val):
-		if num > 9:
-			num = 9
-		if num < 1:
-			num = 1
-		if val > 255:
-			val = 255
-		if val < 0:
-			val = 0
-		msg = 'ana%d%03d' % (num, val)
+		mg = cPickle.dumps((num,val))
+		m = '%05d' % sys.getsizeof(mg)
+		msg = 'ana' + m + mg
+		self.send(msg)
+
+	def sendDigital(self, num, val):
+		mg = cPickle.dumps((num, val))
+		m = '%05d' % sys.getsizeof(mg)
+		msg = 'dig' + m + mg
 		self.send(msg)
 
 	def sendIck(self):
@@ -66,16 +67,18 @@ class Connection(object):
 				self.openConnection(self.ip)
 
 def rcv(rcvrun, s):
-	print '1'
 	rcvrun.set()
 	done = False
-	print '2'
-	ev = pygame.event.Event(pygame.USEREVENT + 5, x=0)
-	pygame.fastevent.post(ev)
 	while not done:
 		msg = s.recv(3)
 		if msg == 'ack':
 			print 'ack'
+		elif msg == 'dig':
+			print 'digital'
+		elif msg == 'ana':
+			print 'analog'
+		elif msg == 'ick':
+			print 'ick'
 		elif msg == '':
 			print 'its dead jim'
 			done = True

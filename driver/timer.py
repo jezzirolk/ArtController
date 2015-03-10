@@ -2,9 +2,7 @@ import threading
 import time
 import pygame
 import signal
-USRICK = pygame.USEREVENT
-USR10HZ = pygame.USEREVENT + 1
-USR1HZ = pygame.USEREVENT + 2
+import evtype
 class Timer(object):
 #	tid = 0
 #	stopped = 0
@@ -25,12 +23,12 @@ class Timer(object):
 
 	def worker(self, signum, framstack):
 		self.ticks=self.ticks+1
-		ev = pygame.event.Event(USRICK, x=0)
+		ev = pygame.event.Event(evtype.USRICK, x=0)
 		pygame.fastevent.post(ev)
-		ev = pygame.event.Event(USR10HZ, x=0)
+		ev = pygame.event.Event(evtype.USR10HZ, x=0)
 		pygame.fastevent.post(ev)
 		if self.ticks==10:
-			ev = pygame.event.Event(USR1HZ, x=0)
+			ev = pygame.event.Event(evtype.USR1HZ, x=0)
 			pygame.fastevent.post(ev)
 			self.ticks=0
 		return
