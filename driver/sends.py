@@ -5,19 +5,24 @@ import threading
 import pygame
 import cPickle
 import evtype
+import hardware
 class Connection(object):
 	def __init__(self):
 		self.s = 0
+		self.s2 = 0
 		self.ip = 0
 		self.rcv = 0
+		self.sender = ''
 		self.rcvrun = threading.Event()
 	
 	def openConnection(self, ips):
+		self.sender = 'driver'
 		self.ip = ips
 		port = 1857
 		self.s = socket.socket()
 		con = (self.ip, port)
 		done = False
+		#keep trying to conect
 		while not done:
 			try:
 				self.s.connect(con)
@@ -27,15 +32,23 @@ class Connection(object):
 			except:
 				print 'waiting for connection'
 				time.sleep(2)
+		#start the reciever thread
 		self.rcv = threading.Thread(target=rcv, args=[self.rcvrun,self.s])
 		self.rcv.setDaemon(True)	
 		self.rcv.start()
-	
-	def sendClose(self):
-		msg = 'cls'
-		self.send(msg)
-		self.cls()
 
+	def openListen(self):
+		#start listening
+		self.sender = 'robot'
+		self.s2 = socket.socket()
+		self.s2.bind(('', 1857))
+		self.s2.listen(1)
+		self.s, client_address = self.s2.accept()
+		#start the reciever thread
+		self.rcv = threading.Thread(target=rcv, args[self.rcvrun, self.s])
+		self.rcv.setDaemon(True)
+		self.rcv.start()
+	
 	def sendAnalog(self, num, val):
 		mg = cPickle.dumps((num,val))
 		m = '%05d' % sys.getsizeof(mg)
@@ -51,6 +64,10 @@ class Connection(object):
 	def sendIck(self):
 		msg = 'ick'
 		self.send(msg)
+	
+	def sendAck(self):
+		msg = 'ack'
+		self.send(msg)
 
 	def cls(self):
 		self.s.close()
@@ -64,7 +81,11 @@ class Connection(object):
 				done = True
 			except:
 				print 'lost connection trying again'
-				self.openConnection(self.ip)
+				hardware.onFail()
+				if self.sender = 'driver':
+					self.openConnection(self.ip)
+				elif self.sender = 'robot':
+					self.openListener()
 
 def rcv(rcvrun, s):
 	rcvrun.set()
@@ -74,10 +95,21 @@ def rcv(rcvrun, s):
 		if msg == 'ack':
 			print 'ack'
 		elif msg == 'dig':
+			leng = int(s.recv(5))
+			msg = s.recv(leng)
+			data = cPickle.loads(msg)
+			ev = pygame.event.Event(evtype.USRDIGITAL, num=data[0], val=data[1])
+			pygame.fastevent.post(ev)
 			print 'digital'
 		elif msg == 'ana':
+			leng = int(s.recv(5))
+			msg = s.recv(leng)
+			data = cPickle.loads(msg)
+			ev = pygame.event.Event(evtype.USRANALOG, num = data[0], val = data[1])
+			pygame.fastevent.post(ev)
 			print 'analog'
 		elif msg == 'ick':
+			ev = pygame.event.Event(evtype.USRICK, x=0)
 			print 'ick'
 		elif msg == '':
 			print 'its dead jim'
