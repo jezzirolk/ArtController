@@ -1,4 +1,5 @@
 import pygame
+# constants for all the events 
 USRICK = pygame.USEREVENT + 1
 USRANALOG = pygame.USEREVENT + 2
 USRDIGITAL = pygame.USEREVENT + 3

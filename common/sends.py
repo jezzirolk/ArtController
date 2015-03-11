@@ -14,8 +14,9 @@ class Connection(object):
 		self.rcv = 0
 		self.sender = ''
 		self.rcvrun = threading.Event()
-	
 	def openConnection(self, ips):
+		#sets the object up as a connector
+		#setup all the variable
 		self.sender = 'driver'
 		self.ip = ips
 		port = 1857
@@ -38,6 +39,7 @@ class Connection(object):
 		self.rcv.start()
 
 	def openListen(self):
+		#sets the object up as a listener
 		#start listening
 		self.sender = 'robot'
 		self.s2 = socket.socket()
@@ -52,43 +54,58 @@ class Connection(object):
 		self.rcv.start()
 	
 	def sendAnalog(self, num, val):
-		mg = cPickle.dumps((num,val))
+		#sends an indexed float
+		#serilaizes it
+		mg = cPickle.dumps((int(num),float(val)))
+		#gets the size
 		m = '%05d' % sys.getsizeof(mg)
+		# adds the header, followed by the size as 5 digits, and then the message
 		msg = 'ana' + m + mg
 		self.send(msg)
 
 	def sendDigital(self, num, val):
-		mg = cPickle.dumps((num, val))
+		#sends an indexed boolean
+		#searilaizes the data
+		mg = cPickle.dumps((int(num), bool(val)))
+		#get the size of the message
 		m = '%05d' % sys.getsizeof(mg)
+		#adds the header, followed by the size, then adds the message
 		msg = 'dig' + m + mg
 		self.send(msg)
 
 	def sendIck(self):
+		#sends an ick message
 		msg = 'ick'
 		self.send(msg)
 	
 	def sendAck(self):
+		#sends an ack message
 		msg = 'ack'
 		self.send(msg)
 
 	def cls(self):
+		#gracefully closes the socket, though never used
 		self.s.close()
 	
 	def send(self, msg):
 		done = False
 		while not done:
+			#tries to send the message
 			try:
 				self.s.sendall(msg)
 				done = True
 			except:
+				#if it cant it will tell the hardware to make things safe then try again
 				print 'connection lost'
 				hardware.onFail()
+				#so the hardware can make sure to redo what it already was doing before it died
 				if self.sender == 'driver':
 					self.openConnection(self.ip)
 				elif self.sender == 'robot':
 					self.openListen()
 
 def rcv(rcvrun, s):
+	#reciever worker thread
 	rcvrun.set()
 	done = False
 	while not done:
@@ -97,20 +114,32 @@ def rcv(rcvrun, s):
 			#stuff for if an ack shows up
 			pass
 		elif msg == 'dig':
+			# on digital message
+			#pull the size
 			leng = int(s.recv(5))
+			#Pull the message
 			msg = s.recv(leng)
+			#unsearilaize it
 			data = cPickle.loads(msg)
-			ev = pygame.event.Event(evtype.USRDIGITAL, num=data[0], val=data[1])
+			#make and post the event
+			ev = pygame.event.Event(evtype.USRDIGITAL, num=int(data[0]), val=bool(data[1]))
 			pygame.fastevent.post(ev)
 		elif msg == 'ana':
+			#on an analog message
+			#get the size of the data
 			leng = int(s.recv(5))
+			#get the data
 			msg = s.recv(leng)
+			#unsearilaize it
 			data = cPickle.loads(msg)
-			ev = pygame.event.Event(evtype.USRANALOG, num = data[0], val = data[1])
+			#make and post the event
+			ev = pygame.event.Event(evtype.USRANALOG, num = int(data[0]), val = float(data[1]))
 			pygame.fastevent.post(ev)
 		elif msg == 'ick':
+			#on an ick message
 			ev = pygame.event.Event(evtype.USRICK, x=0)
 		elif msg == '':
+			#on a disconnect remotely
 			print 'its dead jim'
 			done = True
 		else:
@@ -118,5 +147,3 @@ def rcv(rcvrun, s):
 			print 'was sent'
 	rcvrun.clear()
 	return
-
-
