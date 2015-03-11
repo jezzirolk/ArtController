@@ -1,70 +1,62 @@
-import socket
-#import Adafruit_BBIO.PWM as PWM
 import sys
-import robotCode
-import cPickle
-
-# Set IO values for future use
-# TODO: GPIO, I2C, UART
-pwm = ["P9_14", "P9_16", "P9_21", "P9_22", "P9_42", "P8_13", "P8_19"]
-ain = ["P9_33", "P9_35", "P9_36", "P9_37", "P9_38", "P9_39", "P9_40"]
-packetLoss = 5  # Optimizing 
-
-ldrive = 0
-rdrive = 1
-
-host = ''
-port = 1857
-
-# Setup data socket
-s = socket.socket()
-s.bind((host, port))
-print 'Bound at port', port
-s.listen(1)
-
-connection, client_address = s.accept()
-print 'Connected to', client_address
-
-# Start PWM values at pseudo-zero
-#for st in pwm:
-#    PWM.start(st, 50)
-
-# Handle Driver Input
-while True:
-	msg = connection.recv(3)
-	if msg == 'dig':
-		#if it is a digital message
-		leng = int(connection.recv(5))
-		msg = connection.recv(leng)
-		data = cPickle.loads(msg)
-		robotCode.onDigital(data[0], data[1])
-	elif msg == 'ana':
-		#if it is an analog message
-		leng = int(connection.recv(5))
-		msg = connection.recv(leng)
-		data = cPickle.loads(msg)
-		robotCode.onAnalog(data[0], data[1])
-        
-	elif msg == 'cls':
-        # Received the disconnect command
-		print 'Driver disconnected, cleaning up...'
-		connection.sendall('GG')
-		break
-	elif msg == 'ick':
-		connection.sendall('ack')
-		print 'ick, Ack'
-	elif msg == '':
-		print 'its dead jim'	
-		break
+import os
+if __name__ == '__main__':
+	if __package__ is None:
+		sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+		from common.sends import Connection
+		from common.timer import Timer
+		from common import evtype
 	else:
-		print msg
-		print 'was sent'
-	
+		from ..common.sends import Connection
 
-# Clean up PWMs
-#PWM.cleanup()
-
-# Clean up connection object
-connection.close()
-
-s.close()
+import socket
+import time
+import pygame
+import string
+import robotCode
+#makes it so no screen opens
+os.environ["SDL_VIDEODRIVER"] = 'dummy'
+#init the pygame and display setup
+pygame.init()
+pygame.display.init()
+screen = pygame.display.set_mode([1,1])
+#init the queue
+pygame.fastevent.init()
+#init the joystick
+js = pygame.joystick.Joystick(0)
+js.init()
+#start the connection
+con = Connection()
+con.openListen()
+#start the timer
+t=Timer()
+t.startTimer()
+#run the user init code
+rc = robotCode.RobotCode(con)
+#queue processing loop
+while True:
+	#let the queue do what it needs
+	pygame.fastevent.pump()
+	#pull the next event
+	ev = pygame.fastevent.poll()
+	if ev.type == pygame.NOEVENT:
+		#on an empty queue wait
+		time.sleep(.2)
+	elif ev.type == evtype.USRICK:
+		#if an ick event respond to it
+		pass
+	elif ev.type == evtype.USR10HZ:
+		#on the 10Hz timer send ick and then run user code
+		con.sendIck()
+		rc.on10hz()
+	elif ev.type == evtype.USR1HZ:
+		#on the 1Hz timer run user code
+		rc.on1hz()
+	elif ev.type == evtype.USRDIGITAL:
+		#on a digital reciever run user code passing the num and val
+		rc.onDigital(ev.num, ev.val)
+	elif ev.type == evtype.USRANALOG:
+		#on a analog reciever run user code passing the num and val
+		rc.onAnalog(ev.num, ev.val)
+	else:
+		print 'something Else'

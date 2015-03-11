@@ -43,7 +43,9 @@ class Connection(object):
 		self.s2 = socket.socket()
 		self.s2.bind(('', 1857))
 		self.s2.listen(1)
+		print 'waiting for a connection'
 		self.s, client_address = self.s2.accept()
+		print 'connected'
 		#start the reciever thread
 		self.rcv = threading.Thread(target=rcv, args=[self.rcvrun, self.s])
 		self.rcv.setDaemon(True)
@@ -75,17 +77,16 @@ class Connection(object):
 	def send(self, msg):
 		done = False
 		while not done:
-			print "sending", msg
 			try:
 				self.s.sendall(msg)
 				done = True
 			except:
-				print 'lost connection trying again'
+				print 'connection lost'
 				hardware.onFail()
 				if self.sender == 'driver':
 					self.openConnection(self.ip)
 				elif self.sender == 'robot':
-					self.openListener()
+					self.openListen()
 
 def rcv(rcvrun, s):
 	rcvrun.set()
@@ -93,24 +94,22 @@ def rcv(rcvrun, s):
 	while not done:
 		msg = s.recv(3)
 		if msg == 'ack':
-			print 'ack'
+			#stuff for if an ack shows up
+			pass
 		elif msg == 'dig':
 			leng = int(s.recv(5))
 			msg = s.recv(leng)
 			data = cPickle.loads(msg)
 			ev = pygame.event.Event(evtype.USRDIGITAL, num=data[0], val=data[1])
 			pygame.fastevent.post(ev)
-			print 'digital'
 		elif msg == 'ana':
 			leng = int(s.recv(5))
 			msg = s.recv(leng)
 			data = cPickle.loads(msg)
 			ev = pygame.event.Event(evtype.USRANALOG, num = data[0], val = data[1])
 			pygame.fastevent.post(ev)
-			print 'analog'
 		elif msg == 'ick':
 			ev = pygame.event.Event(evtype.USRICK, x=0)
-			print 'ick'
 		elif msg == '':
 			print 'its dead jim'
 			done = True
