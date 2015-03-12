@@ -34,15 +34,15 @@ class DriverCode(object):
 	def onJoyButtonDown(self, num):
 		if num == 0:
 			# A button, spinup
-			self.con.sendAnalog(4, 1.0)
+			self.con.sendAnalog(2, 1.0)
 			pass
 		if num == 1:
 			# B button, stop wheel
-			self.con.sendAnalog(4, 0.0)
+			self.con.sendAnalog(2, 0.0)
 			pass
 		if num == 2:
 			# X button, spinback
-			self.con.sendAnalog(4, -1.0)
+			self.con.sendAnalog(2, -1.0)
 			pass
 		if num == 5:
 			# R bump, switch speed modes
@@ -59,13 +59,13 @@ class DriverCode(object):
 	#on a joystick axis moving
 	def onJoyAxisMove(self, axis, val):
 		#tank Drive
-		if axis == 2:
+		if axis == 1:
 			if self.gearmode == 'low':
-				self.con.sendAnalog(2, val/2)
+				self.con.sendAnalog(0, val/2)
 			else:
-				self.con.sendAnalog(2, val)
-		elif axis == 5:
+				self.con.sendAnalog(0, val)
+		elif axis == 4:
 			if self.gearmode == 'low':
-				self.con.sendAnalog(3, val/2)
+				self.con.sendAnalog(1, val/2)
 			else:
-				self.con.sendAnalog(3, val)
+				self.con.sendAnalog(1, val)
