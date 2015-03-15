@@ -13,9 +13,14 @@ class DriverCode(object):
 	def __init__(self, c):
 		self.con = c
 		self.gearmode = 'low'
-
+		self.axis0 = 0.0
+		self.axis1 = 0.0
+		self.axis2 = 0.0
 	#clocking timer actions
 	def on10hz(self):
+		#self.con.sendAnalog(0, self.axis0)
+		#self.con.sendAnalog(1, self.axis1)
+		#self.con.sendAnalog(2, self.axis2)
 		pass
 
 	#clocking timer actions
@@ -34,14 +39,17 @@ class DriverCode(object):
 	def onJoyButtonDown(self, num):
 		if num == 0:
 			# A button, spinup
-			self.con.sendAnalog(2, 1.0)
+			print 'spinup'
+			self.con.sendAnalog(2,  1.0)
 			pass
 		if num == 1:
 			# B button, stop wheel
-			self.con.sendAnalog(2, 0.0)
+			print 'off'
+			self.con.sendAnalog(2,  0.0)
 			pass
 		if num == 2:
-			# X button, spinback
+			# X button, spinbacka
+			print 'spinback'
 			self.con.sendAnalog(2, -1.0)
 			pass
 		if num == 5:
@@ -59,13 +67,13 @@ class DriverCode(object):
 	#on a joystick axis moving
 	def onJoyAxisMove(self, axis, val):
 		#tank Drive
-		if axis == 1:
+		if axis == 4:
 			if self.gearmode == 'low':
+				self.con.sendAnalog(0, val/4)
+			else:
 				self.con.sendAnalog(0, val/2)
-			else:
-				self.con.sendAnalog(0, val)
-		elif axis == 4:
+		elif axis == 1:
 			if self.gearmode == 'low':
-				self.con.sendAnalog(1, val/2)
+				self.con.sendAnalog(1, -val/4)
 			else:
-				self.con.sendAnalog(1, val)
+				self.con.sendAnalog(1, -val/2)

@@ -26,7 +26,7 @@ js = pygame.joystick.Joystick(0)
 js.init()
 #start the connection
 con = Connection()
-con.openConnection('192.168.0.101')
+con.openConnection('192.168.0.100')
 #start the timer
 t=Timer()
 t.startTimer()
@@ -67,6 +67,16 @@ while True:
 		#run user code to process axis motion
 		print ev.axis
 		print ev.value
+#		axis = [0,0,0,0,0,0]
+#		axis[ev.axis] = ev.value
+#		evlist = pygame.fastevent.get(pygame.JOYAXISMOTION)
+#		for ev in evlist:
+#			axis[ev.axis] = ev.value
+##		dc.onJoyAxisMove(0, axis[0])
+#		dc.onJoyAxisMove(1, axis[1])
+#		dc.onJoyAxisMove(2, axis[2])
+#		dc.onJoyAxisMove(3, axis[3])
+#		dc.onJoyAxisMove(4, axis[4])
 		dc.onJoyAxisMove(ev.axis, ev.value)
 	else:
 		print 'something Else'
