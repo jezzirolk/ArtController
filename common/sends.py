@@ -54,13 +54,27 @@ class Connection(object):
 		self.rcv.start()
 	
 	def sendAnalog(self, num, val):
+		#All Old send code
 		#sends an indexed float
 		#serilaizes it
-		mg = cPickle.dumps((int(num),float(val)))
+		#mg = cPickle.dumps((int(num),float(val)))
 		#gets the size
-		m = '%05d' % sys.getsizeof(mg)
+		#m = '%05d' % sys.getsizeof(mg)
 		# adds the header, followed by the size as 5 digits, and then the message
-		msg = 'ana' + m + mg
+		#msg = 'ana' + m + mg
+		#self.send(msg)
+		nu = '%02d' % num
+		print nu
+		pn = '2'
+		if val < 1 :
+			pn = '1'
+		else:
+			pn = '0'
+		print pn
+		vl = '%.6f' % abs(val)
+		print vl
+		msg = 'ana' + nu + pn + vl
+		print msg
 		self.send(msg)
 
 	def sendDigital(self, num, val):
@@ -127,13 +141,22 @@ def rcv(rcvrun, s):
 		elif msg == 'ana':
 			#on an analog message
 			#get the size of the data
-			leng = int(s.recv(5))
+			#leng = int(s.recv(5))
 			#get the data
-			msg = s.recv(leng)
+			#msg = s.recv(leng)
 			#unsearilaize it
-			data = cPickle.loads(msg)
+			#data = cPickle.loads(msg)
+			nm = int(s.recv(2))
+			print nm
+			pn = int(s.recv(1))
+			print pn
+			vlu = float(s.recv(8))
+			print vlu
+			if pn == 1:
+				vlu = vlu * -1
+			print vlu
 			#make and post the event
-			ev = pygame.event.Event(evtype.USRANALOG, num = int(data[0]), val = float(data[1]))
+			ev = pygame.event.Event(evtype.USRANALOG, num = nm, val = vlu)
 			pygame.fastevent.post(ev)
 		elif msg == 'ick':
 			#on an ick message

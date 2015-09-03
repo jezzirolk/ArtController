@@ -26,7 +26,8 @@ js = pygame.joystick.Joystick(0)
 js.init()
 #start the connection
 con = Connection()
-con.openConnection('192.168.0.100')
+#con.openConnection('192.168.0.100')
+con.openConnection('127.0.0.1')
 #start the timer
 t=Timer()
 t.startTimer()
