@@ -10,12 +10,13 @@ class RobotCode(object):
 	# The analog and digital signals use a different set of numbers
 
 	# anything that needs to be done when the robot is started up
-	def __init__(self,c):
-		self.con = c
+	def __init__(self,c,d):
+		self.con1 = c
+		self.con2 = d
 
 	#when an analog variable is recieved
 	def onAnalog(self, num, val):
-		hardware.setPwm(num, val)
+		pass
 
 	#when a digital variable is recieved
 	def onDigital(self, num, val):

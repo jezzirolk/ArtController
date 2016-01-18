@@ -14,20 +14,21 @@ import time
 import pygame
 import string
 import driverCode
-#os.environ["SDL_VIDEODRIVER"] = 'dummy'
+os.environ["SDL_VIDEODRIVER"] = 'dummy'
 #init the pygame and display setup
 pygame.init()
 pygame.display.init()
-screen = pygame.display.set_mode([800,600])
+screen = pygame.display.set_mode([1,1])
 #init the queue
 pygame.fastevent.init()
 #init the joystick
-js = pygame.joystick.Joystick(0)
-js.init()
+#js = pygame.joystick.Joystick(0)
+#js.init()
 #start the connection
 con = Connection()
 #con.openConnection('192.168.0.100')
-con.openConnection('127.0.0.1')
+con.openConnectionPort('127.0.0.1', 2000)
+#con.openConnectionPort('127.0.0.1', 2001)
 #start the timer
 t=Timer()
 t.startTimer()
@@ -68,16 +69,6 @@ while True:
 		#run user code to process axis motion
 		print ev.axis
 		print ev.value
-#		axis = [0,0,0,0,0,0]
-#		axis[ev.axis] = ev.value
-#		evlist = pygame.fastevent.get(pygame.JOYAXISMOTION)
-#		for ev in evlist:
-#			axis[ev.axis] = ev.value
-##		dc.onJoyAxisMove(0, axis[0])
-#		dc.onJoyAxisMove(1, axis[1])
-#		dc.onJoyAxisMove(2, axis[2])
-#		dc.onJoyAxisMove(3, axis[3])
-#		dc.onJoyAxisMove(4, axis[4])
 		dc.onJoyAxisMove(ev.axis, ev.value)
 	else:
 		print 'something Else'

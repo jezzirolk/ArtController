@@ -11,17 +11,17 @@ class Connection(object):
 		self.s = 0
 		self.s2 = 0
 		self.ip = 0
+		self.port = 1857
 		self.rcv = 0
-		self.sender = ''
+		self.sender = 'default'
 		self.rcvrun = threading.Event()
 	def openConnection(self, ips):
 		#sets the object up as a connector
 		#setup all the variable
 		self.sender = 'driver'
 		self.ip = ips
-		port = 1857
 		self.s = socket.socket()
-		con = (self.ip, port)
+		con = (self.ip, self.port)
 		done = False
 		#keep trying to conect
 		while not done:
@@ -37,13 +37,17 @@ class Connection(object):
 		self.rcv = threading.Thread(target=rcv, args=[self.rcvrun,self.s])
 		self.rcv.setDaemon(True)	
 		self.rcv.start()
+	
+	def openConnectionPort(self, ips, port):
+		self.port = port
+		self.openConnection(ips)
 
 	def openListen(self):
 		#sets the object up as a listener
 		#start listening
 		self.sender = 'robot'
 		self.s2 = socket.socket()
-		self.s2.bind(('', 1857))
+		self.s2.bind(('', self.port))
 		self.s2.listen(1)
 		print 'waiting for a connection'
 		self.s, client_address = self.s2.accept()
@@ -52,6 +56,10 @@ class Connection(object):
 		self.rcv = threading.Thread(target=rcv, args=[self.rcvrun, self.s])
 		self.rcv.setDaemon(True)
 		self.rcv.start()
+
+	def openListenPort(self, port):
+		self.port = port
+		self.openListen()
 	
 	def sendAnalog(self, num, val):
 		#All Old send code
@@ -80,11 +88,21 @@ class Connection(object):
 	def sendDigital(self, num, val):
 		#sends an indexed boolean
 		#searilaizes the data
-		mg = cPickle.dumps((int(num), bool(val)))
+		#mg = cPickle.dumps((int(num), bool(val)))
 		#get the size of the message
-		m = '%05d' % sys.getsizeof(mg)
+		#m = '%05d' % sys.getsizeof(mg)
 		#adds the header, followed by the size, then adds the message
-		msg = 'dig' + m + mg
+		nu = '%02d' % num
+		print nu
+		pn = '2'
+		if val < 1 :
+			pn = '1'
+		else:
+			pn = '0'
+		print pn
+		vl = '%08d' % abs(val)
+		print vl
+		msg = 'dig' + nu + pn + vl
 		self.send(msg)
 
 	def sendIck(self):
@@ -130,13 +148,23 @@ def rcv(rcvrun, s):
 		elif msg == 'dig':
 			# on digital message
 			#pull the size
-			leng = int(s.recv(5))
+			#leng = int(s.recv(5))
 			#Pull the message
-			msg = s.recv(leng)
+			#msg = s.recv(leng)
 			#unsearilaize it
-			data = cPickle.loads(msg)
+			#data = cPickle.loads(msg)
+			nm = int(s.recv(2))
+			print nm
+			pn = int(s.recv(1))
+			print pn
+			vlu = float(s.recv(8))
+			print vlu
+			if pn == 1:
+				vlu = vlu * -1
+			print vlu
+			#
 			#make and post the event
-			ev = pygame.event.Event(evtype.USRDIGITAL, num=int(data[0]), val=bool(data[1]))
+			ev = pygame.event.Event(evtype.USRDIGITAL, num=nm, val=vlu)
 			pygame.fastevent.post(ev)
 		elif msg == 'ana':
 			#on an analog message

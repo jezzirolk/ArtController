@@ -28,13 +28,15 @@ pygame.fastevent.init()
 #js.init()
 #start the connection
 hardware.init()
-con = Connection()
-con.openListen()
+con1 = Connection()
+con2 = Connection()
+con1.openListenPort(2000)
+con2.openListenPort(2001)
 #start the timer
 t=Timer()
 t.startTimer()
 #run the user init code
-rc = robotCode.RobotCode(con)
+rc = robotCode.RobotCode(con1,con2)
 #queue processing loop
 while True:
 	#let the queue do what it needs
