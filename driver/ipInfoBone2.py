@@ -6,5 +6,5 @@ class IpInfo(object):
 
 	def __init__(self):
 		self.ip = '127.0.0.1'
-		self.port = '2001'
+		self.port = 2001
 
