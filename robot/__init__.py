@@ -51,7 +51,8 @@ while True:
 		pass
 	elif ev.type == evtype.USR10HZ:
 		#on the 10Hz timer send ick and then run user code
-		con.sendIck()
+		con1.sendIck()
+		con2.sendIck()
 		rc.on10hz()
 	elif ev.type == evtype.USR1HZ:
 		#on the 1Hz timer run user code

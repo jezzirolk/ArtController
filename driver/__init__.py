@@ -14,6 +14,7 @@ import time
 import pygame
 import string
 import driverCode
+import ipInfo
 os.environ["SDL_VIDEODRIVER"] = 'dummy'
 #init the pygame and display setup
 pygame.init()
@@ -25,9 +26,10 @@ pygame.fastevent.init()
 #js = pygame.joystick.Joystick(0)
 #js.init()
 #start the connection
+ip = ipInfo.IpInfo()
 con = Connection()
 #con.openConnection('192.168.0.100')
-con.openConnectionPort('127.0.0.1', 2000)
+con.openConnectionPort(ip.ip, ip.port)
 #con.openConnectionPort('127.0.0.1', 2001)
 #start the timer
 t=Timer()
@@ -67,8 +69,6 @@ while True:
 		dc.onJoyButtonUp(ev.button)
 	elif ev.type == pygame.JOYAXISMOTION:
 		#run user code to process axis motion
-		print ev.axis
-		print ev.value
 		dc.onJoyAxisMove(ev.axis, ev.value)
 	else:
 		print 'something Else'
