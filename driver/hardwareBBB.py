@@ -1,20 +1,41 @@
 import sys
 import Adafruit_BBIO.PWM as PWM
+import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.ADC as ADC
 import time
 pwmarray = ["P9_14","P9_21", "P9_42"]
+GPIOinArray = []
+GPIOoutArray = []
+AINarray = []
 def init():
- 	for starter in pwmarray:
+ 	#for starter in pwmarray:
+	#	print starter
+	#	PWM.start(starter,15,100,0)
+	for starter in GPIOinArray:
 		print starter
-		PWM.start(starter,15,100,0)
-
+		GPIO.setup(starter, GPIO.IN)
+	for starter in GPIOoutArray:
+		print starter
+		GPIO.setup(starter, GPIO.OUT
+	ADC.setup()	
+	
 def setPwm(num, val):
-	val = val*5+15
-	if val >14 and val <16:
-		val = 15
-	PWM.set_duty_cycle(pwmarray[num], val)
+	#val = val*5+15
+	#if val >14 and val <16:
+	#	val = 15
+	#PWM.set_duty_cycle(pwmarray[num], val)
 
 def setGpio(num, val):
-	print 'GPIO stuff'
+	if val = 0:
+		GPIO.output(GPIOoutArray[num],GPIO.LOW)
+	else
+		GPIO.output(GPIOoutArrau[num],GPIO.HIGH)
+
+def getGpio(num):
+	return GPIO.input(GPIOinArray[num])
+
+def getAio(num)
+	return ADC.read(AINarray[num])
 
 def onFail():
 	for failz in pwmarray:

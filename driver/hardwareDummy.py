@@ -13,6 +13,12 @@ def setPwm(num, val):
 def setGpio(num, val):
 	print 'GPIO', num, val
 
+def getGpio(num):
+	return 1
+
+def getAin(num):
+	return 1.0
+
 #for when the driver disconnects it sets things to a safe value
 def onFail():
 	print 'maikng shit safe on breaking'
