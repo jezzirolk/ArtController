@@ -21,7 +21,8 @@ class DriverCode(object):
 
 	#clocking timer actions
 	def on1hz(self):
-	    hardware.getGpio(0)
+	    test = hardware.getGpio(0)
+        print test
 	#on a recive of of a true false variable
 	def onDigital(self, num, val):
 		pass

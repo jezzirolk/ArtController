@@ -35,7 +35,7 @@ def setGpio(num, val):
 def getGpio(num):
 	return GPIO.input(GPIOinArray[num])
 
-def getAio(num)
+def getAio(num):
 	return ADC.read(AINarray[num])
 
 def onFail():
