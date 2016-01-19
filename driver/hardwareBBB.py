@@ -24,6 +24,7 @@ def setPwm(num, val):
 	#if val >14 and val <16:
 	#	val = 15
 	#PWM.set_duty_cycle(pwmarray[num], val)
+    pass
 
 def setGpio(num, val):
 	if val = 0:
