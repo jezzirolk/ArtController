@@ -13,26 +13,26 @@ class DriverCode(object):
 	#anthing that needs to be done at the robot startup
 	def __init__(self, c):
 		hardware.init()
-		self.position = -1
+		self.radioSw1 = -1
+		self.radioSw2 = -1
+		self.radioPot1 = -1
+		self.radioPot2 = -1
 		self.con = c
 
 	#clocking timer actions
 	def on10hz(self):
-		test = hardware.getAio(0)
-		if (test < .25) & (self.position != 0):
-			self.position = 0
-			self.con.sendDigital(2,0)
-		elif (test > .25) & (test < .5) & (self.position != 1):
-			self.position = 1
-			self.con.sendDigital(2,1)
-		elif (test > .5) & (test < .75) & (self.position != 2):
-			self.position = 2
-			self.con.sendDigital(2,2)
-		elif (test > .75) & (self.position != 3):
-			self.position = 3
-			self.con.sendDigital(2,3)
-		
-		print test
+		Rsw11 = hardware.getGpio(0)
+		Rsw12 = hardware.getGpio(1)
+		Rsw13 = hardware.getGpio(2)
+		if (Rsw11 = 1) & (Rsw12 = 1) & (Rsw13 = 0) & (self.radioSw1 != 0)
+			self.radioSw1 = 0
+			print 0
+		if (Rsw11 = 0) & (Rsw12 = 1) & (Rsw13 = 0) & (self.radioSw1 != 1)
+			self.radioSw1 = 1
+			print 1
+		if (Rsw11 = 0) & (Rsw12 = 0) & (Rsw13 = 0) & (self.radioSw1 != 2)
+			self.radioSw1 = 2
+			print 2
 
 	#clocking timer actions
 	def on1hz(self):

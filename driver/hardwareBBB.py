@@ -4,9 +4,9 @@ import Adafruit_BBIO.GPIO as GPIO
 import Adafruit_BBIO.ADC as ADC
 import time
 pwmarray = ["P9_14","P9_21", "P9_42"]
-GPIOinArray = ["P9_12"]
+GPIOinArray = ["P9_12","P9_15","P9_23","P9_25","P9_27"]
 GPIOoutArray = []
-AINarray = ["AIN5"]
+AINarray = ["AIN0","AIN1"]
 def init():
  	#for starter in pwmarray:
 	#	print starter
