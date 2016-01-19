@@ -1,5 +1,6 @@
 import sys,os
-	
+import hardware
+
 class DriverCode(object):
 	# If anyting needs to get send to the  side use either
 	#	self.con.sendAnalog(int, float)
