@@ -17,12 +17,12 @@ class DriverCode(object):
 
 	#clocking timer actions
 	def on10hz(self):
-        pass
+		pass
 
 	#clocking timer actions
 	def on1hz(self):
-	    test = hardware.getGpio(0)
-        print test
+		test = hardware.getGpio(0)
+		print test
 	#on a recive of of a true false variable
 	def onDigital(self, num, val):
 		pass
