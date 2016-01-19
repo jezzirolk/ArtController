@@ -11,11 +11,13 @@ class DriverCode(object):
 
 	#anthing that needs to be done at the robot startup
 	def __init__(self, c):
+		ain
 		self.con = c
 
 	#clocking timer actions
 	def on10hz(self):
-		pass
+		test = hardware.getAin(0)
+		print test
 
 	#clocking timer actions
 	def on1hz(self):
