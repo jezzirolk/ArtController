@@ -14,6 +14,7 @@ class DriverCode(object):
 	def __init__(self, c):
 		self.con = c
         hardware.init()
+		self.test = -1
 
 	#clocking timer actions
 	def on10hz(self):
@@ -22,7 +23,10 @@ class DriverCode(object):
 	#clocking timer actions
 	def on1hz(self):
 		test = hardware.getGpio(0)
-		print test
+		if test != self.test:
+			self.test = test
+			print self.test
+			
 	#on a recive of of a true false variable
 	def onDigital(self, num, val):
 		pass
