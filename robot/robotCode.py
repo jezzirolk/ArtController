@@ -1,5 +1,6 @@
 import sys,os
 import hardware
+import OSC
 class RobotCode(object):
 	# If anyting needs to get send to the Driver side use either
 	#	self.con.sendAnalog(int, float)
@@ -13,6 +14,8 @@ class RobotCode(object):
 	def __init__(self,c,d):
 		self.con1 = c
 		self.con2 = d
+		self.osc = OSC.OSCClient()
+		self.osc.connect(('127.0.0.1',53000 ))
 
 	#when an analog variable is recieved
 	def onAnalog(self, num, val):
@@ -21,6 +24,11 @@ class RobotCode(object):
 	#when a digital variable is recieved
 	def onDigital(self, num, val):
 		if num == 1:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/test")
+				oscmsg.append('1')
+				self.osc.send(oscmsg)
 			print val
 		pass
 
