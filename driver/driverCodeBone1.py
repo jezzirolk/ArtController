@@ -24,13 +24,13 @@ class DriverCode(object):
 		Rsw11 = hardware.getGpio(0)
 		Rsw12 = hardware.getGpio(1)
 		Rsw13 = hardware.getGpio(2)
-		if (Rsw11 == 1) & (Rsw12 == 1) & (Rsw13 == 0) & (self.radioSw1 !== 0)
+		if (Rsw11 == 1) & (Rsw12 == 1) & (Rsw13 == 0) & (self.radioSw1 != 0)
 			self.radioSw1 = 0
 			print 0
-		if (Rsw11 == 0) & (Rsw12 == 1) & (Rsw13 == 0) & (self.radioSw1 !== 1)
+		if (Rsw11 == 0) & (Rsw12 == 1) & (Rsw13 == 0) & (self.radioSw1 != 1)
 			self.radioSw1 = 1
 			print 1
-		if (Rsw11 == 0) & (Rsw12 == 0) & (Rsw13 == 0) & (self.radioSw1 !== 2)
+		if (Rsw11 == 0) & (Rsw12 == 0) & (Rsw13 == 0) & (self.radioSw1 != 2)
 			self.radioSw1 = 2
 			print 2
 
