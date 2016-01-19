@@ -13,11 +13,18 @@ class DriverCode(object):
 	#anthing that needs to be done at the robot startup
 	def __init__(self, c):
 		hardware.init()
+		self.position = -1
 		self.con = c
 
 	#clocking timer actions
 	def on10hz(self):
 		test = hardware.getAio(0)
+		if test < .25:
+			self.position = 0
+			self.con.sendDigital(2,0)
+		elif (test > .25) & (test < .5):
+			self.position = 1
+			self.con.sendDigital(2,1)
 		print test
 
 	#clocking timer actions

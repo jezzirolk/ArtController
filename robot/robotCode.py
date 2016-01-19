@@ -30,6 +30,8 @@ class RobotCode(object):
 				oscmsg.append('1')
 				self.osc.send(oscmsg)
 			print val
+		elif num == 2:
+			print val
 		pass
 
 	#actions that happen at specific fequencies
