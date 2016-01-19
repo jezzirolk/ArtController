@@ -25,6 +25,13 @@ class DriverCode(object):
 		elif (test > .25) & (test < .5) & (self.position != 1):
 			self.position = 1
 			self.con.sendDigital(2,1)
+		elif (test > .5) & (test < .75) & (self.position != 2):
+			self.position = 2
+			self.con.sendDigital(2,2)
+		elif (test > .75) & (self.position != 3):
+			self.position = 3
+			self.con.sendDigital(2,3)
+		
 		print test
 
 	#clocking timer actions
