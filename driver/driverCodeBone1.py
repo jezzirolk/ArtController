@@ -12,6 +12,7 @@ class DriverCode(object):
 
 	#anthing that needs to be done at the robot startup
 	def __init__(self, c):
+		hardware.init()
 		self.con = c
 
 	#clocking timer actions
