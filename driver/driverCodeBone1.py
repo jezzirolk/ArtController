@@ -16,7 +16,7 @@ class DriverCode(object):
 
 	#clocking timer actions
 	def on10hz(self):
-		test = hardware.getAin(0)
+		test = hardware.getAio(0)
 		print test
 
 	#clocking timer actions
