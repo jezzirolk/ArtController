@@ -39,5 +39,6 @@ def getAio(num):
 	return ADC.read(AINarray[num])
 
 def onFail():
-	for failz in pwmarray:
-		PWM.set_duty_cycle(failz, 15)
+	#for failz in pwmarray:
+	#	PWM.set_duty_cycle(failz, 15)
+	pass

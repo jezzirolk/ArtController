@@ -25,6 +25,7 @@ class DriverCode(object):
 		test = hardware.getGpio(0)
 		if test != self.test:
 			self.test = test
+			self.con.sendDigital(1,test)
 			print self.test
 			
 	#on a recive of of a true false variable
