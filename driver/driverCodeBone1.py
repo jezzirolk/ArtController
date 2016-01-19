@@ -23,16 +23,28 @@ class DriverCode(object):
 	def on10hz(self):
 		Rsw11 = hardware.getGpio(0)
 		Rsw12 = hardware.getGpio(1)
-		Rsw13 = hardware.getGpio(2)
-		if (Rsw11 == 1) & (Rsw12 == 1) & (Rsw13 == 0) & (self.radioSw1 != 0):
+		Rsw21 = hardware.getGpio(2)
+		Rsw22 = hardware.getGpio(3)
+		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
-			print 0
-		elif (Rsw11 == 0) & (Rsw12 == 1) & (Rsw13 == 0) & (self.radioSw1 != 1):
+			print 'Radio SW1 - 0'
+		elif (Rsw11 == 0) & (Rsw12 == 1) & (self.radioSw1 != 1):
 			self.radioSw1 = 1
-			print 1
-		elif (Rsw11 == 0) & (Rsw12 == 0) & (Rsw13 == 0) & (self.radioSw1 != 2):
+			print 'Radio SW1 - 1'
+		elif (Rsw11 == 0) & (Rsw12 == 0) & (self.radioSw1 != 2):
 			self.radioSw1 = 2
-			print 2
+			print 'Radio SW1 - 2'
+		if (Rsw21 == 1) & (Rsw22 == 1) & (self.radioSw2 != 0):
+			self.radioSw1 = 0
+			print 'Radio SW2 - 0'
+		elif (Rsw21 == 0) & (Rsw22 == 1) & (self.radioSw1 != 1):
+			self.radioSw1 = 1
+			print 'Radio SW2 - 1'
+		elif (Rsw11 == 0) & (Rsw12 == 0) & (self.radioSw1 != 2):
+			self.radioSw1 = 2
+			print 'Radio SW2 - 2'
+
+
 
 	#clocking timer actions
 	def on1hz(self):
