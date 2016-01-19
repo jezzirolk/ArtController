@@ -27,7 +27,7 @@ def setPwm(num, val):
     pass
 
 def setGpio(num, val):
-	if val = 0:
+	if val == 0:
 		GPIO.output(GPIOoutArray[num],GPIO.LOW)
 	else
 		GPIO.output(GPIOoutArrau[num],GPIO.HIGH)
