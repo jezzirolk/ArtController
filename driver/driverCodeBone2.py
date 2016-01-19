@@ -1,4 +1,5 @@
 import sys,os
+import hardware
 	
 class DriverCode(object):
 	# If anyting needs to get send to the  side use either
@@ -15,12 +16,11 @@ class DriverCode(object):
 
 	#clocking timer actions
 	def on10hz(self):
-		pass
+        pass
 
 	#clocking timer actions
 	def on1hz(self):
-		pass
-	
+	    hardware.getGpio(0)
 	#on a recive of of a true false variable
 	def onDigital(self, num, val):
 		pass

@@ -4,7 +4,7 @@ import Adafruit_BBIO.GPIO as GPIO
 import Adafruit_BBIO.ADC as ADC
 import time
 pwmarray = ["P9_14","P9_21", "P9_42"]
-GPIOinArray = []
+GPIOinArray = ["P9_12"]
 GPIOoutArray = []
 AINarray = []
 def init():
@@ -16,7 +16,7 @@ def init():
 		GPIO.setup(starter, GPIO.IN)
 	for starter in GPIOoutArray:
 		print starter
-		GPIO.setup(starter, GPIO.OUT
+		GPIO.setup(starter, GPIO.OUT)
 	ADC.setup()	
 	
 def setPwm(num, val):
