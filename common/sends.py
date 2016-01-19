@@ -93,15 +93,15 @@ class Connection(object):
 		#m = '%05d' % sys.getsizeof(mg)
 		#adds the header, followed by the size, then adds the message
 		nu = '%02d' % num
-		print nu
+		#print nu
 		pn = '2'
 		if val < 1 :
 			pn = '1'
 		else:
 			pn = '0'
-		print pn
+		#print pn
 		vl = '%08d' % abs(val)
-		print vl
+		#print vl
 		msg = 'dig' + nu + pn + vl
 		self.send(msg)
 
@@ -154,14 +154,14 @@ def rcv(rcvrun, s):
 			#unsearilaize it
 			#data = cPickle.loads(msg)
 			nm = int(s.recv(2))
-			print nm
+			#print nm
 			pn = int(s.recv(1))
-			print pn
+			#print pn
 			vlu = float(s.recv(8))
-			print vlu
+			#print vlu
 			if pn == 1:
 				vlu = vlu * -1
-			print vlu
+			#print vlu
 			#
 			#make and post the event
 			ev = pygame.event.Event(evtype.USRDIGITAL, num=nm, val=vlu)

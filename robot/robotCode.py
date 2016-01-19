@@ -20,7 +20,7 @@ class RobotCode(object):
 
 	#when a digital variable is recieved
 	def onDigital(self, num, val):
-		if num = 1:
+		if num == 1:
 			print val
 		pass
 
