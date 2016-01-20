@@ -53,25 +53,25 @@ class DriverCode(object):
 			print 'Radio Pot 2 - %s' % (Rpot2)
 
 	def test(self, test):
-		if (test > 0) & (test < .1)
+		if (test > 0) & (test < .1):
 			return 0
-		if (test > .1) & (test < .2)
+		if (test > .1) & (test < .2):
 			return 1
-		if (test > .2) & (test < .3)
+		if (test > .2) & (test < .3):
 			return 2
-		if (test > .3) & (test < .4)
+		if (test > .3) & (test < .4):
 			return 3
-		if (test > .4) & (test < .5)
+		if (test > .4) & (test < .5):
 			return 4
-		if (test > .5) & (test < .6)
+		if (test > .5) & (test < .6):
 			return 5
-		if (test > .6) & (test < .7)
+		if (test > .6) & (test < .7):
 			return 6
-		if (test > .7) & (test < .8)
+		if (test > .7) & (test < .8):
 			return 7
-		if (test > .8) & (test < .9)
+		if (test > .8) & (test < .9):
 			return 8
-		if (test > .9) & (test < 1)
+		if (test > .9) & (test < 1):
 			return 9
 
 
