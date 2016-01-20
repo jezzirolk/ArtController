@@ -34,7 +34,7 @@ class DriverCode(object):
 		elif (Rsw11 == 0) & (Rsw12 == 0) & (self.radioSw1 != 2):
 			self.radioSw1 = 2
 			print 'Radio SW1 - 2'
-		if (Rsw21 == 1) & (Rsw22 == 1) & (self.radioSw2 != 0):
+		if (Rsw21 == 1) & (Rsw22 == 0) & (self.radioSw2 != 0):
 			self.radioSw2 = 0
 			print 'Radio SW2 - 0'
 		elif (Rsw21 == 0) & (Rsw22 == 1) & (self.radioSw2 != 1):
