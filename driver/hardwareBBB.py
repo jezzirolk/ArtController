@@ -6,7 +6,7 @@ import time
 pwmarray = ["P9_14","P9_21", "P9_42"]
 GPIOinArray = ["P9_12","P9_15","P9_23","P9_27"]
 GPIOoutArray = []
-AINarray = ["AIN0","AIN1","AIN2"]
+AINarray = ["AIN0","AIN1","AIN3"]
 def init():
  	#for starter in pwmarray:
 	#	print starter
