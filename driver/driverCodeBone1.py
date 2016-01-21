@@ -55,7 +55,7 @@ class DriverCode(object):
 			self.radioPot2 = Rpot2
 			print 'Radio Pot 2 - %s' % (Rpot2)
 		if (cargearpos > (self.gearpos + .005)) or (cargearpos < (self.gearpos - .005)):
-			if self.gearDeb = 0:
+			if self.gearDeb == 0:
 				print 'gearChanged'
 		if self.gearDeb > 0:
 			self.gearDeb = self.gearDeb - .1
