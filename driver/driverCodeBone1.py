@@ -30,7 +30,6 @@ class DriverCode(object):
 		Rpot1 = self.test(hardware.getAio(0))
 		Rpot2 = self.test(hardware.getAio(1))
 		cargearpos = hardware.getAio(2)
-		print cargearpos	
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
 			print 'Radio SW1 - 0'
@@ -55,8 +54,9 @@ class DriverCode(object):
 		if Rpot2 != self.radioPot2:
 			self.radioPot2 = Rpot2
 			print 'Radio Pot 2 - %s' % (Rpot2)
-		if (cargearpos > (self.gearPos + .1)) or (cargearpos < (self.gearPos - .1)):
+		if (cargearpos > (self.gearPos + .005)) or (cargearpos < (self.gearPos - .005)):
 			self.gearPos = cargearpos
+			print cargearpos
 			if self.gearDeb < .1:
 				self.gearDeb = 10
 				print 'gearChanged'
