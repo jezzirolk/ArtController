@@ -17,6 +17,8 @@ class DriverCode(object):
 		self.radioSw2 = -1
 		self.radioPot1 = -1
 		self.radioPot2 = -1
+		self.gearPos = -1
+		self.gearDeb = 0
 		self.con = c
 
 	#clocking timer actions
@@ -27,6 +29,7 @@ class DriverCode(object):
 		Rsw22 = hardware.getGpio(3)
 		Rpot1 = self.test(hardware.getAio(0))
 		Rpot2 = self.test(hardware.getAio(1))
+		cargearpos = hardware.getAio(2)
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
 			print 'Radio SW1 - 0'
@@ -51,6 +54,11 @@ class DriverCode(object):
 		if Rpot2 != self.radioPot2:
 			self.radioPot2 = Rpot2
 			print 'Radio Pot 2 - %s' % (Rpot2)
+		if (cargearpos > (self.gearpos + .005)) or (cargearpos < (self.gearpos - .005)):
+			if self.gearDeb = 0:
+				print 'gearChanged'
+		if self.gearDeb > 0:
+			self.gearDeb = self.gearDeb - .1
 
 	def test(self, test):
 		if (test > 0) & (test < .1):
