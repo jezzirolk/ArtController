@@ -48,6 +48,7 @@ class DriverCode(object):
 		Rsw11 = hardware.getGpio(0)
 		Rsw12 = hardware.getGpio(3)
 		Rsw21 = hardware.getGpio(1)
+p
 		Rsw22 = hardware.getGpio(2)
 		Rpot1 = self.test(hardware.getAio(0))
 		#Rpot2 = self.test(hardware.getAio(1))
@@ -61,7 +62,6 @@ class DriverCode(object):
 		turb = hardware.getGpio(11)
 		ignit = hardware.getGpio(12)
 		wipe = hardware.getGpio(13)
-		print lsw1
 		cargearpos = hardware.getAio(2)
  		fridge1 = hardware.getGpio(14)
  		fridge2 = hardware.getGpio(15)
