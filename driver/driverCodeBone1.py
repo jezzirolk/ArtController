@@ -162,13 +162,13 @@ class DriverCode(object):
 		if lsw5 != self.lampsw5:
 			self.lampls5 = lsw5
 			print 'lamp5'
-		if (tura = 0) and (turb = 1) and (self.turn != 1):
+		if (tura == 0) and (turb == 1) and (self.turn != 1):
 			self.turn = 1
 			print 'Turn Left'
-		elif (tura = 0) and (turb = 0) and (self.turn != 2):
+		elif (tura == 0) and (turb == 0) and (self.turn != 2):
 			self.turn = 2
 			print 'turn right'
-		elif (tura = 1) and (turb = 1) and (self.turn !0):
+		elif (tura == 1) and (turb == 1) and (self.turn != 0):
 			self.turn = 0
 			print 'stopped turing'
 		if wipe != self.wiper:
