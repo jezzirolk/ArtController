@@ -30,16 +30,33 @@ class DriverCode(object):
 		self.lamprl4 = -1
 		self.lamprl5 = -1
 		self.pirAway = -1
+		self.turnA = -1
+		self.turnB = -1
+		self.ignition = -1
+		self.wiper = -1
+		self.radiopot1 = -1
+		self.carGas = -1
 		self.con = c
 
 	#clocking timer actions
 	def on10hz(self):
 		Rsw11 = hardware.getGpio(0)
-		Rsw12 = hardware.getGpio(1)
-		Rsw21 = hardware.getGpio(2)
-		Rsw22 = hardware.getGpio(3)
+		Rsw12 = hardware.getGpio(3)
+		Rsw21 = hardware.getGpio(1)
+		Rsw22 = hardware.getGpio(2)
 		Rpot1 = self.test(hardware.getAio(0))
 		Rpot2 = self.test(hardware.getAio(1))
+		pir = hardware.getGpio(4)
+		lsw1 = hardware.getGpio(5)
+		lsw2 = hardware.getGpio(6)	
+		lsw3 = hardware.getGpio(7)
+		lsw4 = hardware.getGpio(8)
+		lsw5 = hardware.getGpio(9)
+		tura = hardware.getGpio(10)
+		turb = hardware.getGpio(11)
+		ignit = hardware.getGpio(12)
+		wipe = hardware.getGpio(13)
+
 		cargearpos = hardware.getAio(2)
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
@@ -73,6 +90,16 @@ class DriverCode(object):
 				print 'gearChanged'
 		if self.gearDeb > 0:
 			self.gearDeb = self.gearDeb - .1
+		if pir != self.pirAway:
+			print PIR
+		if ls1:
+			hardware.setGpio(0,1)
+		else:
+			hardware.getGpio(0,0)
+		if ls1:
+			hardware.setGpio(0,1)
+		else:
+			hardware.getGpio(0,0)
 
 	def test(self, test):
 		if (test > 0) & (test < .1):
