@@ -51,7 +51,7 @@ class DriverCode(object):
 		Rsw22 = hardware.getGpio(2)
 		Rpot1 = self.test(hardware.getAio(0))
 		#Rpot2 = self.test(hardware.getAio(1))
-		pir = hardware.getGpio(4)
+		pirA = hardware.getGpio(4)
 		lsw1 = hardware.getGpio(5)
 		lsw2 = hardware.getGpio(6)	
 		lsw3 = hardware.getGpio(7)
@@ -123,8 +123,8 @@ class DriverCode(object):
 				print 'gearChanged'
 		if self.gearDeb > 0:
 			self.gearDeb = self.gearDeb - .1
-		if pir != self.pirAway:
-			self.pirAway = pir
+		if pirA != self.pirAway:
+			self.pirAway = pirA
 			print "PIR"
 			print pir
 		if lsw1 == 1:
@@ -174,10 +174,10 @@ class DriverCode(object):
 		if wipe != self.wiper:
 			self.wiper = wipe
 			print 'wipers'
-		if (car > .5) and (self.carGas != 1):
+		if (gas > .5) and (self.carGas != 1):
 			self.carGas = 1
 			print 'gason'
-		if (car < .5) and (self.carGas !=0):
+		if (gas < .5) and (self.carGas !=0):
 			self.cargas = 0
 			print 'gasoff'
 
