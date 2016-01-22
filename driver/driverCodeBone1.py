@@ -122,7 +122,7 @@ class DriverCode(object):
 			#print cargearpos
 			if self.gearDeb < .1:
 				self.gearDeb = 10
-				self.con.sendDigital(20, toy2)
+				self.con.sendDigital(20, 1)
 				print 'gearChanged'
 		if self.gearDeb > 0:
 			self.gearDeb = self.gearDeb - .1
@@ -176,19 +176,19 @@ class DriverCode(object):
 			print 'stopped turing'
 		if wipe != self.wiper:
 			self.wiper = wipe
-			self.con.sendDigital(11, toy2)
+			self.con.sendDigital(11, wipe)
 			print 'wipers'
 		if (gas > .5) and (self.carGas != 1):
 			self.carGas = 1
-			self.con.sendDigital(21, toy2)
+			self.con.sendDigital(21, self.carGas)
 			print 'gason'
 		if (gas < .5) and (self.carGas !=0):
 			self.carGas = 0
-			self.con.sendDigital(22, toy2)
+			self.con.sendDigital(22, self.carGas)
 			print 'gasoff'
 		if ignit != self.ignition:
 			self.ignition = ignit
-			self.con.sendDigital(10, toy2)
+			self.con.sendDigital(10, ignit)
 			print "ignition"
 
 
