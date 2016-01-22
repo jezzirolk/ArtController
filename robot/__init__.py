@@ -29,14 +29,14 @@ pygame.fastevent.init()
 #start the connection
 hardware.init()
 con1 = Connection()
-con2 = Connection()
+#con2 = Connection()
 con1.openListenPort(2000)
-con2.openListenPort(2001)
+#con2.openListenPort(2001)
 #start the timer
 t=Timer()
 t.startTimer()
 #run the user init code
-rc = robotCode.RobotCode(con1,con2)
+rc = robotCode.RobotCode(con1)
 #queue processing loop
 while True:
 	#let the queue do what it needs
@@ -52,7 +52,7 @@ while True:
 	elif ev.type == evtype.USR10HZ:
 		#on the 10Hz timer send ick and then run user code
 		con1.sendIck()
-		con2.sendIck()
+#		con2.sendIck()
 		rc.on10hz()
 	elif ev.type == evtype.USR1HZ:
 		#on the 1Hz timer run user code

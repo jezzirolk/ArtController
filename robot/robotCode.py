@@ -11,9 +11,8 @@ class RobotCode(object):
 	# The analog and digital signals use a different set of numbers
 
 	# anything that needs to be done when the robot is started up
-	def __init__(self,c,d):
+	def __init__(self,c):
 		self.con1 = c
-		self.con2 = d
 		self.osc = OSC.OSCClient()
 		self.osc.connect(('127.0.0.1',53000 ))
 

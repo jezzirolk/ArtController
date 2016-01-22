@@ -30,12 +30,17 @@ class DriverCode(object):
 		self.lamprl4 = -1
 		self.lamprl5 = -1
 		self.pirAway = -1
-		self.turnA = -1
-		self.turnB = -1
+		self.turn = -1
 		self.ignition = -1
 		self.wiper = -1
 		self.radiopot1 = -1
 		self.carGas = -1
+		self.f1 = -1
+		self.f2 = -1
+		self.enter = -1
+		self.toy1 = -1
+		self.toy2 = -1
+		self.toy3 = -1
 		self.con = c
 
 	#clocking timer actions
@@ -58,6 +63,34 @@ class DriverCode(object):
 		wipe = hardware.getGpio(13)
 		print lsw1
 		cargearpos = hardware.getAio(2)
+ 		fridge1 = hardware.getGpio(14)
+ 		fridge2 = hardware.getGpio(15)
+ 		pir = hardware.getGpio(16)
+ 		toy1 = hardware.getGpio(17)
+ 		toy2 = hardware.getGpio(18)
+ 		toy3 = hardware.getGpio(19)
+ 		if fridge1 != self.f1:
+			self.f1 = fridge1
+#			self.con.sendDigital(1, )
+			print 'fridge1'
+		if fridge2 != self.f2:
+			self.f2 = fridge2
+#			self.con.sendDigital(1, )
+			print 'fridge2'
+		if pir != self.enter:
+			self.enter = pir
+#			self.con.sendDigital(1, )
+			print 'pirEnter'
+		if toy1 != self.toy1:
+#			self.con.sendDigital(1, )
+			self.toy1 = toy1    
+			print 'toy1'
+		if toy2 != self.toy2:
+			self.toy2 = toy2
+			print 'toy2'
+		if toy3 != self.toy3:
+			self.toy3 = toy3    
+			print 'toy3'
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
 			print 'Radio SW1 - 0'
@@ -102,6 +135,47 @@ class DriverCode(object):
 			hardware.setGpio(1,1)
 		else:
 			hardware.setGpio(1,0)
+		if lsw3:
+			hardware.setGpio(2,1)
+		else:
+			hardware.setGpio(2,0)
+		if lsw4:
+			hardware.setGpio(3,1)
+		else:
+			hardware.setGpio(3,0)
+		if lsw5:
+			hardware.setGpio(4,1)
+		else:
+			hardware.setGpio(4,0)
+		if lsw1 != self.lampsw1:
+			self.lampsw1 = lsw1
+			print 'lamp1'
+		if lsw2 != self.lampsw2:
+			self.lampsw2 = lsw2
+			print 'lamp2'
+		if lsw3 != self.lampsw3:
+			self.lampsw3 = lsw3
+			print 'lamp3'
+		if lsw4 != self.lampsw4:
+			self.lampsw4 = lsw4
+			print 'lamp4'
+		if lsw5 != self.lampsw5:
+			self.lampls5 = lsw5
+			print 'lamp5'
+		if (tura = 0) and (turb = 1) and (self.turn != 1):
+			self.turn = 1
+			print 'Turn Left'
+		elif (tura = 0) and (turb = 0) and (self.turn != 2):
+			self.turn = 2
+			print 'turn right'
+		elif (tura = 1) and (turb = 1) and (self.turn !0):
+			self.turn = 0
+			print 'stopped turing'
+		if wipe != self.wiper:
+			self.wiper = wipe
+			print 'wipers'
+
+
 
 	def test(self, test):
 		if (test > 0) & (test < .1):
