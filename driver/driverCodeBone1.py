@@ -160,7 +160,7 @@ class DriverCode(object):
 			self.lampsw4 = lsw4
 			print 'lamp4'
 		if lsw5 != self.lampsw5:
-			self.lamplw5 = lsw5
+			self.lampsw5 = lsw5
 			print 'lamp5'
 		if (tura == 0) and (turb == 1) and (self.turn != 1):
 			self.turn = 1
