@@ -71,11 +71,11 @@ class DriverCode(object):
 		gas = hardware.getAio(3) 
 		if fridge1 != self.f1:
 			self.f1 = fridge1
-			self.con.sendDigital(1, 1)
+			self.con.sendDigital(1, fridge1)
 			print 'fridge1'
 		if fridge2 != self.f2:
 			self.f2 = fridge2
-			self.con.sendDigital(1, 1)
+			self.con.sendDigital(2, fridge2)
 			print 'fridge2'
 		if pir != self.enter:
 			self.enter = pir
