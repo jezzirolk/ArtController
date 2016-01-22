@@ -80,9 +80,9 @@ t
 		if Rpot1 != self.radioPot1:
 			self.radioPot1 = Rpot1
 			print 'Radio Pot 1 - %s' % (Rpot1)
-		if Rpot2 != self.radioPot2:
-			self.radioPot2 = Rpot2
-			print 'Radio Pot 2 - %s' % (Rpot2)
+		#if Rpot2 != self.radioPot2:
+		#	self.radioPot2 = Rpot2
+		#	print 'Radio Pot 2 - %s' % (Rpot2)
 		if (cargearpos > (self.gearPos + .05)) or (cargearpos < (self.gearPos - .05)):
 			self.gearPos = cargearpos
 			print cargearpos
