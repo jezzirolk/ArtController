@@ -68,7 +68,7 @@ class DriverCode(object):
  		toy1 = hardware.getGpio(17)
  		toy2 = hardware.getGpio(18)
  		toy3 = hardware.getGpio(19)
-		gas = hardware,getAio(3) 
+		gas = hardware.getAio(3) 
 		if fridge1 != self.f1:
 			self.f1 = fridge1
 #			self.con.sendDigital(1, )
