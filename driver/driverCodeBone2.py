@@ -42,10 +42,10 @@ class DriverCode(object):
 		if toy1 != self.toy1:
 			self.toy1 = toy1	
 			print toy1
-		if toy2 != toy2:
+		if toy2 != self.toy2:
 			self.toy2 = toy2
 			print toy2
-		if toy3 != toy3:
+		if toy3 != self.toy3:
 			self.toy3 = toy3	
 			print toy3
 
