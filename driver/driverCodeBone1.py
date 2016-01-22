@@ -178,7 +178,7 @@ class DriverCode(object):
 			self.carGas = 1
 			print 'gason'
 		if (gas < .5) and (self.carGas !=0):
-			self.cargas = 0
+			self.carGas = 0
 			print 'gasoff'
 
 
