@@ -174,10 +174,10 @@ class DriverCode(object):
 		if wipe != self.wiper:
 			self.wiper = wipe
 			print 'wipers'
-		if (car > .5) and (self.carGas != 1)
+		if (car > .5) and (self.carGas != 1):
 			self.carGas = 1
 			print 'gason'
-		if (car < .5) and (self.carGas !=0)
+		if (car < .5) and (self.carGas !=0):
 			self.cargas = 0
 			print 'gasoff'
 
