@@ -82,13 +82,15 @@ class DriverCode(object):
 #			self.con.sendDigital(1, )
 			print 'pirEnter'
 		if toy1 != self.toy1:
-#			self.con.sendDigital(1, )
+			self.con.sendDigital(15, toy1 )
 			self.toy1 = toy1    
 			print 'toy1'
 		if toy2 != self.toy2:
+			self.con.sendDigital(16, toy2)
 			self.toy2 = toy2
 			print 'toy2'
 		if toy3 != self.toy3:
+			self.con.sendDigital(17, toy3)
 			self.toy3 = toy3    
 			print 'toy3'
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):

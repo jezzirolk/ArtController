@@ -24,11 +24,11 @@ class RobotCode(object):
 	def onDigital(self, num, val):
 		print num
 		if num == 1:
-			if val == 1:
+			if val == 0:
 				oscmsg = OSC.OSCMessage()
 				oscmsg.setAddress("/cue/1/start")
 				self.osc.send(oscmsg)
-			if val == 0:
+			if val == 1:
 				oscmsg = OSC.OSCMessage()
 				oscmsg.setAddress("/cue/1.5/start")
 				self.osc.send(oscmsg)
