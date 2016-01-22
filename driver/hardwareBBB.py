@@ -3,10 +3,10 @@ import Adafruit_BBIO.PWM as PWM
 import Adafruit_BBIO.GPIO as GPIO
 import Adafruit_BBIO.ADC as ADC
 import time
-pwmarray = ["P9_14","P9_21", "P9_42"]
-GPIOinArray = ["P9_12","P9_15","P9_23","P9_27"]
-GPIOoutArray = []
-AINarray = ["AIN0","AIN1","AIN3"]
+#pwmarray = ["P9_14","P9_21", "P9_42"]
+GPIOinArray = ["P9_12","P9_14","P9_16","P9_15","P9_21","P9_23","P9_27","P9_30","P9_41","P9_42","P8_15","P8_16","P8_17","P8_18",]
+GPIOoutArray = ["P8_7","P8_8","P8_9","P8_10","P8_11",]
+AINarray = ["AIN0","AIN1","AIN2","AIN3","AIN4"]
 def init():
  	#for starter in pwmarray:
 	#	print starter
