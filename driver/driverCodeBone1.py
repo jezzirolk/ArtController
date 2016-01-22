@@ -68,7 +68,8 @@ class DriverCode(object):
  		toy1 = hardware.getGpio(17)
  		toy2 = hardware.getGpio(18)
  		toy3 = hardware.getGpio(19)
- 		if fridge1 != self.f1:
+		gas = hardware,getAio(3) 
+		if fridge1 != self.f1:
 			self.f1 = fridge1
 #			self.con.sendDigital(1, )
 			print 'fridge1'
@@ -173,6 +174,12 @@ class DriverCode(object):
 		if wipe != self.wiper:
 			self.wiper = wipe
 			print 'wipers'
+		if (car > .5) and (self.carGas != 1)
+			self.carGas = 1
+			print 'gason'
+		if (car < .5) and (self.carGas !=0)
+			self.cargas = 0
+			print 'gasoff'
 
 
 
