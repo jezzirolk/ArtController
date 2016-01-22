@@ -95,11 +95,11 @@ class DriverCode(object):
 		if lsw1:
 			hardware.setGpio(0,1)
 		else:
-			hardware.getGpio(0,0)
-		if ls1:
-			hardware.setGpio(0,1)
+			hardware.setGpio(0,0)
+		if lsw2:
+			hardware.setGpio(1,1)
 		else:
-			hardware.getGpio(0,0)
+			hardware.setGpio(1,0)
 
 	def test(self, test):
 		if (test > 0) & (test < .1):
