@@ -45,7 +45,7 @@ class DriverCode(object):
 		Rsw21 = hardware.getGpio(1)
 		Rsw22 = hardware.getGpio(2)
 		Rpot1 = self.test(hardware.getAio(0))
-		Rpot2 = self.test(hardware.getAio(1))
+		#Rpot2 = self.test(hardware.getAio(1))
 		pir = hardware.getGpio(4)
 		lsw1 = hardware.getGpio(5)
 		lsw2 = hardware.getGpio(6)	
@@ -60,6 +60,7 @@ class DriverCode(object):
 		cargearpos = hardware.getAio(2)
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
+t
 			print 'Radio SW1 - 0'
 		elif (Rsw11 == 0) & (Rsw12 == 0) & (self.radioSw1 != 1):
 			self.radioSw1 = 1
@@ -91,6 +92,7 @@ class DriverCode(object):
 		if self.gearDeb > 0:
 			self.gearDeb = self.gearDeb - .1
 		if pir != self.pirAway:
+			self.pirAway = pir
 			print "PIR"
 		if lsw1:
 			hardware.setGpio(0,1)
