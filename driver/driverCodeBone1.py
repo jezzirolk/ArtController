@@ -25,6 +25,11 @@ class DriverCode(object):
 		self.lampsw4 = -1
 		self.lampsw5 = -1
 		self.lamprl1 = -1
+		self.lamprl2 = -1
+		self.lamprl3 = -1
+		self.lamprl4 = -1
+		self.lamprl5 = -1
+
 		self.con = c
 
 	#clocking timer actions

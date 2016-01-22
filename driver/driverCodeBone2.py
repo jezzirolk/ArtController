@@ -20,7 +20,7 @@ class DriverCode(object):
 		self.toy1 = -1
 		self.toy2 = -1
 		self.toy3 = -1
-		self.proxsense = -1
+		self.proxsense = 0
 	#clocking timer actions
 	def on10hz(self):
 		fridge1 = hardware.getGpio(0)
