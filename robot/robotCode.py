@@ -91,6 +91,33 @@ class RobotCode(object):
 				oscmsg = OSC.OSCMessage()
 				oscmsg.setAddress("/cue/11/start")
 				self.osc.send(oscmsg)
+		if num == 4:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/19/start")
+				self.osc.send(oscmsg)
+		if num == 5:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/20/start")
+				self.osc.send(oscmsg)
+		if num == 6:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/49/start")
+				self.osc.send(oscmsg)
+		if num == 7:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/21/start")
+				self.osc.send(oscmsg)
+		if num == 8:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/17/start")
+				self.osc.send(oscmsg)
+
+
 
 
 	#actions that happen at specific fequencies

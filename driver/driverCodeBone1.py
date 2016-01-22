@@ -95,24 +95,31 @@ class DriverCode(object):
 			print 'toy3'
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
+			self.con.sendDigital(11, 0)
 			print 'Radio SW1 - 0'
 		elif (Rsw11 == 0) & (Rsw12 == 0) & (self.radioSw1 != 1):
 			self.radioSw1 = 1
+			self.con.sendDigital(11, 1)
 			print 'Radio SW1 - 1'
 		elif (Rsw11 == 0) & (Rsw12 == 1) & (self.radioSw1 != 2):
 			self.radioSw1 = 2
+			self.con.sendDigital(11, 1)
 			print 'Radio SW1 - 2'
 		if (Rsw21 == 1) & (Rsw22 == 0) & (self.radioSw2 != 0):
 			self.radioSw2 = 0
+			self.con.sendDigital(12, 1)
 			print 'Radio SW2 - 0'
 		elif (Rsw21 == 0) & (Rsw22 == 1) & (self.radioSw2 != 1):
 			self.radioSw2 = 1
+			self.con.sendDigital(12, 1)
 			print 'Radio SW2 - 1'
 		elif (Rsw21 == 0) & (Rsw22 == 0) & (self.radioSw2 != 2):
 			self.radioSw2 = 2
+			self.con.sendDigital(12, 1)
 			print 'Radio SW2 - 2'
 		if Rpot1 != self.radioPot1:
 			self.radioPot1 = Rpot1
+			self.con.sendDigital(18, Rpot1)
 			print 'Radio Pot 1 - %s' % (Rpot1)
 		#if Rpot2 != self.radioPot2:
 		#	self.radioPot2 = Rpot2
@@ -218,6 +225,8 @@ class DriverCode(object):
 			return 8
 		if (test > .9) & (test < 1):
 			return 9
+		else:
+			return 0
 
 
 	#clocking timer actions
