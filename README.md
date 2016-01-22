@@ -1,2 +1,2 @@
-# MTUGroundRobot
-Python code for MTU's JSDC Ground Robot
+# Sound Art Controller
+A Purpose Built sound Art Controller
