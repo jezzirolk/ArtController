@@ -30,7 +30,7 @@ def setGpio(num, val):
 	if val == 0:
 		GPIO.output(GPIOoutArray[num],GPIO.LOW)
 	else:
-		GPIO.output(GPIOoutArrau[num],GPIO.HIGH)
+		GPIO.output(GPIOoutArray[num],GPIO.HIGH)
 
 def getGpio(num):
 	return GPIO.input(GPIOinArray[num])
