@@ -189,7 +189,7 @@ class DriverCode(object):
 		if ignit != self.ignition:
 			self.ignition = ignit
 			self.con.sendDigital(10, toy2)
-			print ignition
+			print "ignition"
 
 
 	def test(self, test):

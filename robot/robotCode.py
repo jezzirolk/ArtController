@@ -58,6 +58,39 @@ class RobotCode(object):
 				oscmsg = OSC.OSCMessage()
 				oscmsg.setAddress("/cue/24/start")
 				self.osc.send(oscmsg)
+		if num == 10:
+			if val == 0:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/4/start")
+				self.osc.send(oscmsg)
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/5/start")
+				self.osc.send(oscmsg)
+		if num == 11:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/9/start")
+				self.osc.send(oscmsg)
+			if val == 0:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/9.5/start")
+				self.osc.send(oscmsg)
+		if num == 20:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/6/start")
+				self.osc.send(oscmsg)
+		if num == 21:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/10/start")
+				self.osc.send(oscmsg)
+		if num == 22:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/11/start")
+				self.osc.send(oscmsg)
 
 
 	#actions that happen at specific fequencies
