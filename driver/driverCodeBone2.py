@@ -48,10 +48,10 @@ class DriverCode(object):
 		if toy3 != self.toy3:
 			self.toy3 = toy3	
 			print toy3
-		if (prox < .4) and (self.proxsense = 0)
+		if (prox < .4) and (self.proxsense == 0)
 			self.proxsense = 1
 			print close
-		if (prox > .4) and (self.proxsense = 1)
+		if (prox > .4) and (self.proxsense == 1)
 			self.proxsense = 0
 			print far
 

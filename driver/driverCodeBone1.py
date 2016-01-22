@@ -19,6 +19,9 @@ class DriverCode(object):
 		self.radioPot2 = -1
 		self.gearPos = -1
 		self.gearDeb = 0
+		self.lampsw1
+		self.lampsw2
+		se
 		self.con = c
 
 	#clocking timer actions
