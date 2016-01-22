@@ -14,7 +14,7 @@ class RobotCode(object):
 	def __init__(self,c):
 		self.con1 = c
 		self.osc = OSC.OSCClient()
-		self.osc.connect(('127.0.0.1',53000 ))
+		self.osc.connect(('192.168.1.150',53000 ))
 
 	#when an analog variable is recieved
 	def onAnalog(self, num, val):
