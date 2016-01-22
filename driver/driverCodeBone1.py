@@ -56,7 +56,7 @@ class DriverCode(object):
 		turb = hardware.getGpio(11)
 		ignit = hardware.getGpio(12)
 		wipe = hardware.getGpio(13)
-
+		print lsw1
 		cargearpos = hardware.getAio(2)
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
@@ -84,7 +84,7 @@ class DriverCode(object):
 		#	print 'Radio Pot 2 - %s' % (Rpot2)
 		if (cargearpos > (self.gearPos + .05)) or (cargearpos < (self.gearPos - .05)):
 			self.gearPos = cargearpos
-			print cargearpos
+			#print cargearpos
 			if self.gearDeb < .1:
 				self.gearDeb = 10
 				print 'gearChanged'
@@ -93,6 +93,7 @@ class DriverCode(object):
 		if pir != self.pirAway:
 			self.pirAway = pir
 			print "PIR"
+			print pir
 		if lsw1:
 			hardware.setGpio(0,1)
 		else:
