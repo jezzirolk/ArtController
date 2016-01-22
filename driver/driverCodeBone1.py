@@ -91,7 +91,7 @@ class DriverCode(object):
 		if self.gearDeb > 0:
 			self.gearDeb = self.gearDeb - .1
 		if pir != self.pirAway:
-			print PIR
+			print "PIR"
 		if ls1:
 			hardware.setGpio(0,1)
 		else:
