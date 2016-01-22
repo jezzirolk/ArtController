@@ -79,7 +79,7 @@ class DriverCode(object):
 			print 'fridge2'
 		if pir != self.enter:
 			self.enter = pir
-#			self.con.sendDigital(1, )
+			self.con.sendDigital(14, pir)
 			print 'pirEnter'
 		if toy1 != self.toy1:
 			self.con.sendDigital(15, toy1 )
