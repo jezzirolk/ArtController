@@ -48,7 +48,6 @@ class DriverCode(object):
 		Rsw11 = hardware.getGpio(0)
 		Rsw12 = hardware.getGpio(3)
 		Rsw21 = hardware.getGpio(1)
-p
 		Rsw22 = hardware.getGpio(2)
 		Rpot1 = self.test(hardware.getAio(0))
 		#Rpot2 = self.test(hardware.getAio(1))
