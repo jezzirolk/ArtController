@@ -81,6 +81,7 @@ class DriverCode(object):
 			self.enter = pir
 			self.con.sendDigital(14, pir)
 			print 'pirEnter'
+			print pir
 		if toy1 != self.toy1:
 			self.con.sendDigital(15, toy1 )
 			self.toy1 = toy1    
