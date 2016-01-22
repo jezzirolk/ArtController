@@ -29,7 +29,7 @@ class DriverCode(object):
 		self.lamprl3 = -1
 		self.lamprl4 = -1
 		self.lamprl5 = -1
-
+		self.pirAway = -1
 		self.con = c
 
 	#clocking timer actions

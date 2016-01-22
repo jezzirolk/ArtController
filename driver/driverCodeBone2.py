@@ -50,10 +50,10 @@ class DriverCode(object):
 			print toy3
 		if (prox < .4) and (self.proxsense == 0):
 			self.proxsense = 1
-			print close
+			print "close"
 		if (prox > .4) and (self.proxsense == 1):
 			self.proxsense = 0
-			print far
+			print "far"
 
 	#clocking timer actions
 	def on1hz(self):
