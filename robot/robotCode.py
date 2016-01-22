@@ -43,6 +43,21 @@ class RobotCode(object):
 				oscmsg.setAddress("/cue/3.5/start")
 				self.osc.send(oscmsg)
 			print val
+		if num == 15:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/22/start")
+				self.osc.send(oscmsg)
+		if num == 16:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/23/start")
+				self.osc.send(oscmsg)
+		if num == 17:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/24/start")
+				self.osc.send(oscmsg)
 
 
 	#actions that happen at specific fequencies
