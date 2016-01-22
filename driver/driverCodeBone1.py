@@ -103,7 +103,6 @@ class DriverCode(object):
 			print 'Radio SW1 - 1'
 		elif (Rsw11 == 0) & (Rsw12 == 1) & (self.radioSw1 != 2):
 			self.radioSw1 = 2
-			self.con.sendDigital(11, 1)
 			print 'Radio SW1 - 2'
 		if (Rsw21 == 1) & (Rsw22 == 0) & (self.radioSw2 != 0):
 			self.radioSw2 = 0
