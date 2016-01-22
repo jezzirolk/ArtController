@@ -15,6 +15,7 @@ class RobotCode(object):
 		self.con1 = c
 		self.osc = OSC.OSCClient()
 		self.osc.connect(('192.168.1.150',53000 ))
+		self.radioOn = -1
 
 	#when an analog variable is recieved
 	def onAnalog(self, num, val):
@@ -116,6 +117,23 @@ class RobotCode(object):
 				oscmsg = OSC.OSCMessage()
 				oscmsg.setAddress("/cue/17/start")
 				self.osc.send(oscmsg)
+		if num == 11:
+			if val == 0:
+				self.radioOn = 0
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/13.5/start")
+				self.osc.send(oscmsg)
+			if val == 1:
+				self.radioOn = 1
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/12/start")
+				self.osc.send(oscmsg)
+		if num == 12:
+			if val == 1 and self.radioOn == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/13/start")
+				self.osc.send(oscmsg)
+
 
 
 
