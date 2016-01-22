@@ -135,6 +135,7 @@ class DriverCode(object):
 			self.gearDeb = self.gearDeb - .1
 		if pirA != self.pirAway:
 			self.pirAway = pirA
+			self.con.sendDigital(3,pirA)
 			print "PIR"
 			print pir
 		if lsw1 == 1:
