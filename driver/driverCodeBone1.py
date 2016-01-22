@@ -60,7 +60,6 @@ class DriverCode(object):
 		cargearpos = hardware.getAio(2)
 		if (Rsw11 == 1) & (Rsw12 == 1) & (self.radioSw1 != 0):
 			self.radioSw1 = 0
-t
 			print 'Radio SW1 - 0'
 		elif (Rsw11 == 0) & (Rsw12 == 0) & (self.radioSw1 != 1):
 			self.radioSw1 = 1
