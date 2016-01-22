@@ -161,6 +161,15 @@ class RobotCode(object):
 				oscmsg = OSC.OSCMessage()
 				oscmsg.setAddress("/cue/15/start")
 				self.osc.send(oscmsg)
+				oscmsg2 = OSC.OSCMessage()
+				oscmsg2.setAddress("/cue/48/start")
+				self.osc.send(oscmsg2)
+	
+		if num == 3:
+			if val == 1:
+				oscmsg = OSC.OSCMessage()
+				oscmsg.setAddress("/cue/32/start")
+				self.osc.send(oscmsg)
 
 		if num == 18:
 			print val
