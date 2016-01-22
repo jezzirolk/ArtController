@@ -23,37 +23,30 @@ class DriverCode(object):
 		self.proxsense = 0
 	#clocking timer actions
 	def on10hz(self):
-		fridge1 = hardware.getGpio(0)
-		fridge2 = hardware.getGpio(3)
-		pir = hardware.getGpio(4)
-		toy1 = hardware.getGpio(5)
-		toy2 = hardware.getGpio(6)
-		toy3 = hardware.getGpio(8)
-		prox = hardware.getAio(0)
-		if fridge1 != self.f1:
-			self.f1 = fridge1	
-			print fridge1
-		if fridge2 != self.f2:
-			self.f2 = fridge2	
-			print fridge2
-		if pir != self.enter:
-			self.enter = pir	
-			print pir
-		if toy1 != self.toy1:
-			self.toy1 = toy1	
-			print toy1
-		if toy2 != self.toy2:
-			self.toy2 = toy2
-			print toy2
-		if toy3 != self.toy3:
-			self.toy3 = toy3	
-			print toy3
-		if (prox < .4) and (self.proxsense == 0):
-			self.proxsense = 1
-			print "close"
-		if (prox > .4) and (self.proxsense == 1):
-			self.proxsense = 0
-			print "far"
+fridge1 = hardware.getGpio(0)
+fridge2 = hardware.getGpio(3)
+pir = hardware.getGpio(4)
+toy1 = hardware.getGpio(5)
+toy2 = hardware.getGpio(6)
+toy3 = hardware.getGpio(8)
+if fridge1 != self.f1:
+self.f1 = fridge1	
+print 'fridge1'
+if fridge2 != self.f2:
+self.f2 = fridge2	
+print 'fridge2'
+if pir != self.enter:
+self.enter = pir	
+print 'pirEnter'
+if toy1 != self.toy1:
+self.toy1 = toy1	
+print 'toy1'
+if toy2 != self.toy2:
+self.toy2 = toy2
+print 'toy2'
+if toy3 != self.toy3:
+self.toy3 = toy3	
+print 'toy3'
 
 	#clocking timer actions
 	def on1hz(self):

@@ -127,23 +127,23 @@ class DriverCode(object):
 			self.pirAway = pir
 			print "PIR"
 			print pir
-		if lsw1:
+		if lsw1 = 1:
 			hardware.setGpio(0,1)
 		else:
 			hardware.setGpio(0,0)
-		if lsw2:
+		if lsw2 = 1:
 			hardware.setGpio(1,1)
 		else:
 			hardware.setGpio(1,0)
-		if lsw3:
+		if lsw3 = 1:
 			hardware.setGpio(2,1)
 		else:
 			hardware.setGpio(2,0)
-		if lsw4:
+		if lsw4 = 1:
 			hardware.setGpio(3,1)
 		else:
 			hardware.setGpio(3,0)
-		if lsw5:
+		if lsw5 = 1:
 			hardware.setGpio(4,1)
 		else:
 			hardware.setGpio(4,0)
