@@ -152,18 +152,23 @@ class DriverCode(object):
 			hardware.setGpio(4,0)
 		if lsw1 != self.lampsw1:
 			self.lampsw1 = lsw1
+			self.con.sendDigital(4, lsw1)
 			print 'lamp1'
 		if lsw2 != self.lampsw2:
 			self.lampsw2 = lsw2
+			self.con.sendDigital(5, lsw2)
 			print 'lamp2'
 		if lsw3 != self.lampsw3:
 			self.lampsw3 = lsw3
+			self.con.sendDigital(6, lsw3)
 			print 'lamp3'
 		if lsw4 != self.lampsw4:
 			self.lampsw4 = lsw4
+			self.con.sendDigital(7, lsw4)
 			print 'lamp4'
 		if lsw5 != self.lampsw5:
 			self.lampsw5 = lsw5
+			self.con.sendDigital(8, lsw5)
 			print 'lamp5'
 		if (tura == 0) and (turb == 1) and (self.turn != 1):
 			self.turn = 1

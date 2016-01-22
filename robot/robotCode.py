@@ -87,7 +87,7 @@ class RobotCode(object):
 				oscmsg.setAddress("/cue/10/start")
 				self.osc.send(oscmsg)
 		if num == 22:
-			if val == 1:
+			if val == 0:
 				oscmsg = OSC.OSCMessage()
 				oscmsg.setAddress("/cue/11/start")
 				self.osc.send(oscmsg)
